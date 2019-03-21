@@ -20,6 +20,8 @@ Further notes, links, etc are provided at https://pad.carpentries.org/CMOR_Intro
   - Introduction to RStudio (https://datacarpentry.org/r-socialsci/00-intro/index.html)
   
   - Introduction to R (https://datacarpentry.org/r-socialsci/01-intro-to-r/index.html)
+  
+  [Browse the repo at this point](https://github.com/nek-rwl/CMOR-Intro-to-R/tree/a1ad0436cf1f35b32c5af36952219306140eec6b)
 
 * Lesson 2: Data manipulation
 
@@ -29,3 +31,5 @@ Further notes, links, etc are provided at https://pad.carpentries.org/CMOR_Intro
   
   - Starting with Data (https://datacarpentry.org/r-socialsci/02-starting-with-data/index.html) - just the introduction up to 'What are data frames?'
   - Introducing dplyr for data manipulation (https://datacarpentry.org/r-socialsci/03-dplyr-tidyr/index.html)
+  
+  [Browse the repo at this point](https://github.com/nek-rwl/CMOR-Intro-to-R/tree/f846aa656ad6ac5af57bde9c40debbc34a190eaf)
