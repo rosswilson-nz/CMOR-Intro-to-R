@@ -42,3 +42,5 @@ Further notes, links, etc are provided at https://pad.carpentries.org/CMOR_Intro
   
   - Continuing with dplyr and tidyr for data manipulation (https://datacarpentry.org/r-socialsci/03-dplyr-tidyr/index.html)
   
+  [Browse the repo at this point](https://github.com/nek-rwl/CMOR-Intro-to-R/tree/6218dcdc4b4e8b70bd4853b86509575651878aa0)
+  
