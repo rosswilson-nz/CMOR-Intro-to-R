@@ -34,3 +34,84 @@ interviews_total_meals <- interviews %>%
   mutate(total_meals = no_membrs * no_meals) %>% 
   filter(total_meals > 20) %>% 
   select(village, total_meals)
+
+# summarise()
+interviews %>%
+	summarize(mean_no_membrs = mean(no_membrs))
+
+# summarise() with group_by()
+interviews %>%
+	group_by(village) %>%
+	summarize(mean_no_membrs = mean(no_membrs))
+
+interviews %>%
+	filter(!is.na(memb_assoc)) %>%
+	group_by(village, memb_assoc) %>%
+	summarize(mean_no_membrs = mean(no_membrs))
+
+interviews %>%
+	filter(!is.na(memb_assoc)) %>%
+	group_by(village, memb_assoc) %>%
+	summarize(mean_no_membrs = mean(no_membrs),
+						min_membrs = min(no_membrs))
+
+interviews %>%
+	filter(!is.na(memb_assoc)) %>%
+	group_by(village, memb_assoc) %>%
+	summarize(mean_no_membrs = mean(no_membrs), min_membrs = min(no_membrs)) %>%
+	arrange(min_membrs)
+
+interviews %>%
+	filter(!is.na(memb_assoc)) %>%
+	group_by(village, memb_assoc) %>%
+	summarize(mean_no_membrs = mean(no_membrs),
+						min_membrs = min(no_membrs)) %>%
+	arrange(desc(min_membrs))
+
+# count()
+interviews %>%
+	count(village)
+
+interviews %>%
+	count(village, sort = TRUE)
+
+# exercises
+interviews %>%
+	count(no_meals)
+
+interviews %>%
+	group_by(village) %>%
+	summarize(
+		mean_no_membrs = mean(no_membrs),
+		min_no_membrs = min(no_membrs),
+		max_no_membrs = max(no_membrs),
+		n = n()
+	)
+
+interviews %>%
+	mutate(month = lubridate::month(date),
+				 year = lubridate::year(date)) %>%
+	group_by(year, month) %>%
+	summarize(max_no_membrs = max(no_membrs))
+
+## Reshaping with tidyr::gather() and tidyr::spread()
+# spread() takes a column contining variable names and 'spreads' them out into separate variables
+interviews_spread <- interviews %>%
+	mutate(wall_type_logical = TRUE) %>%
+	spread(key = respondent_wall_type, value = wall_type_logical, fill = FALSE)
+
+# gather() does the opposite - it takes a group of variables representing different outcomes of the same variable and 
+#  'gathers' them together into a single variable
+interviews_gather <- interviews_spread %>%
+	gather(key = "respondent_wall_type", value = "wall_type_logical",
+				 burntbricks:sunbricks) %>%
+	filter(wall_type_logical) %>%
+	select(-wall_type_logical)
+
+# spread() can be used to separate out multiple pieces of information recorded in a single cell of our data frame
+interviews_items_owned <- interviews %>%
+	mutate(split_items = strsplit(items_owned, ";")) %>% # splits the string list of items in 'items_owned' into a list of strings
+	unnest() %>% # creates an 'observation' for each item in the list
+	mutate(items_owned_logical = TRUE) %>%
+	spread(key = split_items, value = items_owned_logical, fill = FALSE) %>% # spreads these into their own variables
+	rename(no_listed_items = `<NA>`) # <NA> values represent households reporting none of the listed items
