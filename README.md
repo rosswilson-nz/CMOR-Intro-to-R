@@ -44,3 +44,11 @@ Further notes, links, etc are provided at https://pad.carpentries.org/CMOR_Intro
   
   [Browse the repo at this point](https://github.com/nek-rwl/CMOR-Intro-to-R/tree/6218dcdc4b4e8b70bd4853b86509575651878aa0)
   
+
+* Lesson 4: Finishing the data manipulation section
+
+  A very brief session just finishing off the data manipulation material
+  
+  How can we export intermediate/derived data?
+  
+  - The last section on dplyr and tidyr for data manipulation (https://datacarpentry.org/r-socialsci/03-dplyr-tidyr/index.html)
