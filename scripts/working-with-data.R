@@ -89,8 +89,8 @@ interviews %>%
 	)
 
 interviews %>%
-	mutate(month = lubridate::month(date),
-				 year = lubridate::year(date)) %>%
+	mutate(month = lubridate::month(interview_date),
+				 year = lubridate::year(interview_date)) %>%
 	group_by(year, month) %>%
 	summarize(max_no_membrs = max(no_membrs))
 
@@ -115,3 +115,23 @@ interviews_items_owned <- interviews %>%
 	mutate(items_owned_logical = TRUE) %>%
 	spread(key = split_items, value = items_owned_logical, fill = FALSE) %>% # spreads these into their own variables
 	rename(no_listed_items = `<NA>`) # <NA> values represent households reporting none of the listed items
+
+# create dataset for plotting in the next lesson
+interviews_plotting <- interviews %>%
+	## spread data by items_owned
+	mutate(split_items = strsplit(items_owned, ";")) %>%
+	unnest() %>%
+	mutate(items_owned_logical = TRUE) %>%
+	spread(key = split_items, value = items_owned_logical, fill = FALSE) %>%
+	rename(no_listed_items = `<NA>`) %>%
+	## spread data by months_lack_food
+	mutate(split_months = strsplit(months_lack_food, ";")) %>%
+	unnest() %>%
+	mutate(months_lack_food_logical = TRUE) %>%
+	spread(key = split_months, value = months_lack_food_logical, fill = FALSE) %>%
+	## add some summary columns
+	mutate(number_months_lack_food = rowSums(select(., Apr:Sept))) %>%
+	mutate(number_items = rowSums(select(., bicycle:television)))
+
+# save dataset to csv file (note: in new data_output directory, separate from the raw data in data/)
+write_csv(interviews_plotting, path = "data_output/interviews_plotting.csv")
