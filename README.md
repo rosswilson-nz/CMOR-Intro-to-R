@@ -52,3 +52,5 @@ Further notes, links, etc are provided at https://pad.carpentries.org/CMOR_Intro
   How can we export intermediate/derived data?
   
   - The last section on dplyr and tidyr for data manipulation (https://datacarpentry.org/r-socialsci/03-dplyr-tidyr/index.html)
+
+  [Browse the repo at this point](https://github.com/nek-rwl/CMOR-Intro-to-R/tree/a8cfb68751eb39b6d1179f921f20ebcf4293753e)
