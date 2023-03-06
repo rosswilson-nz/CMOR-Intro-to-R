@@ -1,0 +1,254 @@
+---
+title: "Introduction to R"
+subtitle: "CMOR Lunch'n'Learn"
+author: "Ross Wilson"
+date: "2023-03-08"
+date-format: "D MMMM YYYY"
+format:
+  revealjs:
+    theme: [default, cmor.scss]
+---
+
+# Getting Started
+
+## What is R? What is RStudio?
+
+- R is a *programming language* designed to undertake statistical analysis
+- RStudio is an Integrated Development Environment (IDE) for R
+  - An IDE is a piece of software including a text editor and other tools to make programming (in this case programming in R, specifically) easier
+  - You don’t need to use RStudio to use R, but it makes it ***a lot*** easier
+  - To use RStudio, you also need R installed and working
+
+## Why learn R?
+
+- Powerful and extendsible
+  - Pretty much any statistical analysis you want to do can be done in R
+- Reproducibility
+  - By writing R scripts (code) for your analyses, they can be easily checked/replicated/updated/adapted, by yourself and others
+- High-quality graphics
+  - R has a lot of plotting functions to help you produce publication-quality figures
+
+## Getting set up
+
+- Install R
+  - <https://cloud.R-project.org/>
+  - Choose the appropriate version for your operating system and follow the instructions
+- Install RStudio
+  - <https://posit.co/download/rstudio-desktop/>
+  - ditto
+
+## Getting to know RStudio
+
+:::{.absolute}
+![](images/rstudio-screenshot.png)
+:::
+
+:::{.fragment}
+:::{.absolute top="170" left="0" width="609" height="161" style="border-style:solid; border-width:5px; border-color:red;"}
+:::
+:::{.absolute top="220" left="0" width="609" height="50" style="text-align:center; color:red; font-weight:bold;"}
+Source
+:::
+:::
+
+:::{.fragment}
+:::{.absolute top="336" left="0" width="609" height="311" style="border-style:solid; border-width:5px; border-color:red;"}
+:::
+:::{.absolute top="440" left="0" width="609" style="text-align:center; color:red; font-weight:bold;"}
+Console
+:::
+:::
+
+:::{.fragment}
+:::{.absolute top="170" left="614" width="373" height="180" style="border-style:solid; border-width:5px; border-color:red;"}
+:::
+:::{.absolute top="205" left="614" width="373" style="text-align:center; color:red; font-weight:bold;"}
+Environment/<br>History
+:::
+:::
+
+:::{.fragment}
+:::{.absolute top="355" left="614" width="373" height="292" style="border-style:solid; border-width:5px; border-color:red;"}
+:::
+:::{.absolute top="420" left="614" width="373" style="text-align:center; color:red; font-weight:bold;"}
+Files/Plots/<br>Packages/<br>Help/Viewer
+:::
+:::
+
+## Starting with R
+
+. . .
+
+- We can type math in the console, and get an answer:
+
+```{r}
+#| echo: true
+3+5
+```
+
+. . .
+
+- But to do anything useful, we need to assign the result to a name:
+
+```{r}
+#| echo: true
+x <- 3 + 5
+x
+```
+
+![](images/environment-pane.png){.absolute .fragment top=400 left=500}
+
+## Starting with R
+
+. . .
+
+- Then we can do things with them:
+
+```{r}
+#| echo: true
+y <- 2 * x
+y
+```
+
+![](images/environment-pane-2.png){.absolute .fragment top=150 left=500}
+
+. . .
+
+<br>
+
+- But note that once the value is assigned to y, changing x will not update y:
+
+```{r}
+#| echo: true
+x <- 25
+y
+```
+
+## Functions
+
+- Functions allow us to run commands other than simple arithmetic
+
+```{r}
+#| echo: true
+sqrt(x)
+```
+
+- Functions consist of a set of input *arguments*, code that does something with those inputs, and a return *value*
+
+. . .
+
+- To get help on a function, look up the documentation
+
+```{.r}
+?sqrt
+```
+
+![](images/function-documentation.png){.absolute .fragment top=10 left=500}
+
+## Functions
+
+- You can (and should!) also write your own functions
+
+```{r}
+#| echo: true
+times2 <- function(a) {
+	return(a * 2)
+}
+times2(x)
+```
+
+. . .
+
+- Separating your code out into discrete functions makes it shorter, easier to follow, and less error prone
+
+## Data types
+
+- So far we have only seen single numeric values
+- Data in R can take many forms
+  - The most basic data structure is the *vector*
+
+```{r}
+#| echo: true
+z <- c(3, 7, 10, 6)
+z
+```
+
+. . .
+
+- Vectors can also contain characters
+
+```{r}
+#| echo: true
+c("apple", "banana")
+```
+
+:::{.absolute .fragment .smaller top=500 left=500 width=600 style="background:#ffffff; border-style:solid; border-width:medium; border-color:red; font-size:0.7em;"}
+**The quotes are essential:**
+
+otherwise R will look for the names 'apple' and 'banana' (and use the values we have already defined for those names, not the character strings)
+:::
+
+## Data types {.smaller}
+
+- The basic data types are `numeric`, `character`, `logical` (`TRUE` and `FALSE` values only), and `integer`
+  - Also `complex` and `raw`, but we don't need to worry about those
+- In addition to vectors, more complex data structures include:
+  - lists: similar to vectors, but the elements can be anything (including other lists), and don't need to all be the same
+  - matrices and arrays: like vectors, but with multiple dimensions
+  - data frames: more on these later
+
+## Subsetting
+
+- We can extract values from within a vector (or other data structure) with square brackets
+
+```{r}
+#| echo: true
+a <- c(4, 2, 5, 12)
+a[c(4, 2)]
+```
+
+```{r}
+#| echo: true
+a[c(TRUE, FALSE, TRUE, FALSE)]
+```
+
+- We can use this in conjunction with a logical operator to do conditional subsetting
+
+```{r}
+#| echo: true
+a[a > 4]
+```
+
+# Working with Data Frames
+
+## Data frames
+
+- A data frame is a tabular data structure (like a spreadsheet)
+  - Each column is a variable
+  - Each row is an observation
+- Each column (variable) is a vector, so must contain a single data type
+  - But different columns can have different types
+- We can read data from Excel or CSV spreadsheets, data files from Stata etc, previously saved R data frames, and much else...
+
+## The `tidyverse` {.smaller}
+
+- The '`tidyverse`' is a collection of packages created by the company that makes RStudio
+- It contains a lot of functions designed to make working with data frames easier
+  - `tibble`: a replacement for base data frames
+  - `readr`: read tabular data like csv files (also `readxl` for Excel files, `haven` for SPSS/Stata/SAS, and others for different file types)
+  - `dplyr`: data manipulation
+  - `tidyr`: reshaping and tidying data
+  - `ggplot2`: creating plots
+  - `purrr`: functional programming
+  - `stringr`: working with character strings
+  - `forcats`: working with factor variables
+
+## Data frames
+
+- Reading in a data frame with `read_csv()`:
+```{r}
+library(readr)
+#| echo: true
+gapminder <- read_csv(here::here("raw_data/gapminder_data.csv"))
+gapminder
+```
