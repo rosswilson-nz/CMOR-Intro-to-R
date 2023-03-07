@@ -7,9 +7,23 @@ date-format: "D MMMM YYYY"
 format:
   revealjs:
     theme: [default, cmor.scss]
+    title-slide-attributes: 
+      data-background-image: images/title-background.jpg
+      data-background-size: contain
+      data-background-repeat: no-repeat
+    template-partials:
+      - styles.html
+      - title-slide.html
+    preview-links: auto
 ---
 
-# Getting Started
+```{r}
+#| include: false
+options(pillar.min_title_chars = 8)
+```
+
+
+# Getting Started {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
 
 ## What is R? What is RStudio?
 
@@ -21,7 +35,7 @@ format:
 
 ## Why learn R?
 
-- Powerful and extendsible
+- Powerful and extensible
   - Pretty much any statistical analysis you want to do can be done in R
 - Reproducibility
   - By writing R scripts (code) for your analyses, they can be easily checked/replicated/updated/adapted, by yourself and others
@@ -44,33 +58,33 @@ format:
 :::
 
 :::{.fragment}
-:::{.absolute top="170" left="0" width="609" height="161" style="border-style:solid; border-width:5px; border-color:red;"}
+:::{.absolute top="155" left="0" width="609" height="161" style="border-style:solid; border-width:5px; border-color:red;"}
 :::
-:::{.absolute top="220" left="0" width="609" height="50" style="text-align:center; color:red; font-weight:bold;"}
+:::{.absolute top="205" left="0" width="609" height="50" style="text-align:center; color:red; font-weight:bold;"}
 Source
 :::
 :::
 
 :::{.fragment}
-:::{.absolute top="336" left="0" width="609" height="311" style="border-style:solid; border-width:5px; border-color:red;"}
+:::{.absolute top="321" left="0" width="609" height="311" style="border-style:solid; border-width:5px; border-color:red;"}
 :::
-:::{.absolute top="440" left="0" width="609" style="text-align:center; color:red; font-weight:bold;"}
+:::{.absolute top="425" left="0" width="609" style="text-align:center; color:red; font-weight:bold;"}
 Console
 :::
 :::
 
 :::{.fragment}
-:::{.absolute top="170" left="614" width="373" height="180" style="border-style:solid; border-width:5px; border-color:red;"}
+:::{.absolute top="155" left="614" width="373" height="180" style="border-style:solid; border-width:5px; border-color:red;"}
 :::
-:::{.absolute top="205" left="614" width="373" style="text-align:center; color:red; font-weight:bold;"}
+:::{.absolute top="190" left="614" width="373" style="text-align:center; color:red; font-weight:bold;"}
 Environment/<br>History
 :::
 :::
 
 :::{.fragment}
-:::{.absolute top="355" left="614" width="373" height="292" style="border-style:solid; border-width:5px; border-color:red;"}
+:::{.absolute top="340" left="614" width="373" height="292" style="border-style:solid; border-width:5px; border-color:red;"}
 :::
-:::{.absolute top="420" left="614" width="373" style="text-align:center; color:red; font-weight:bold;"}
+:::{.absolute top="405" left="614" width="373" style="text-align:center; color:red; font-weight:bold;"}
 Files/Plots/<br>Packages/<br>Help/Viewer
 :::
 :::
@@ -96,7 +110,7 @@ x <- 3 + 5
 x
 ```
 
-![](images/environment-pane.png){.absolute .fragment top=400 left=500}
+![](images/environment-pane.png){.absolute .fragment top=300 left=250}
 
 ## Starting with R
 
@@ -110,7 +124,7 @@ y <- 2 * x
 y
 ```
 
-![](images/environment-pane-2.png){.absolute .fragment top=150 left=500}
+![](images/environment-pane-2.png){.absolute .fragment top=115 left=250}
 
 . . .
 
@@ -182,13 +196,13 @@ z
 c("apple", "banana")
 ```
 
-:::{.absolute .fragment .smaller top=500 left=500 width=600 style="background:#ffffff; border-style:solid; border-width:medium; border-color:red; font-size:0.7em;"}
+:::{.absolute .fragment .smaller top=400 left=300 width=500 style="background:#ffffff; border-style:solid; border-width:medium; border-color:red; font-size:0.7em;"}
 **The quotes are essential:**
 
 otherwise R will look for the names 'apple' and 'banana' (and use the values we have already defined for those names, not the character strings)
 :::
 
-## Data types {.smaller}
+## Data types
 
 - The basic data types are `numeric`, `character`, `logical` (`TRUE` and `FALSE` values only), and `integer`
   - Also `complex` and `raw`, but we don't need to worry about those
@@ -219,7 +233,7 @@ a[c(TRUE, FALSE, TRUE, FALSE)]
 a[a > 4]
 ```
 
-# Working with Data Frames
+# Working with Data Frames {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
 
 ## Data frames
 
@@ -230,7 +244,7 @@ a[a > 4]
   - But different columns can have different types
 - We can read data from Excel or CSV spreadsheets, data files from Stata etc, previously saved R data frames, and much else...
 
-## The `tidyverse` {.smaller}
+## The `tidyverse`
 
 - The '`tidyverse`' is a collection of packages created by the company that makes RStudio
 - It contains a lot of functions designed to make working with data frames easier
@@ -247,8 +261,195 @@ a[a > 4]
 
 - Reading in a data frame with `read_csv()`:
 ```{r}
-library(readr)
 #| echo: true
+library(tidyverse)
 gapminder <- read_csv(here::here("raw_data/gapminder_data.csv"))
 gapminder
 ```
+
+## Manipulating data frames with `dplyr`
+
+  - `select()` only a subset of variables
+
+```{r}
+#| echo: true
+select(gapminder, year, country, gdpPercap)
+```
+
+## Manipulating data frames with `dplyr`
+
+  - `filter()` only a subset of observations
+
+```{r}
+#| echo: true
+filter(gapminder, continent == "Europe", year == 2007)
+```
+
+## Manipulating data frames with `dplyr`
+
+  - `mutate()` to create new variables
+
+```{r}
+#| echo: true
+mutate(gapminder, gdp_billion = gdpPercap * pop / 10^9)
+```
+
+## Manipulating data frames with `dplyr`
+
+  - `summarise()` to calculate summary statistics
+
+```{r}
+#| echo: true
+summarise(gapminder, mean_gdpPercap = mean(gdpPercap))
+```
+
+. . .
+
+ - This is most useful in conjunction with `group_by()`
+
+```{r}
+#| echo: true
+summarise(group_by(gapminder, continent),
+					mean_gdpPercap = mean(gdpPercap))
+```
+
+## Manipulating data frames with `dplyr`
+
+  - The power of `dplyr` is in combining several commands using 'pipes'
+  
+  - The previous command could be written:
+
+```{r}
+#| echo: true
+gapminder %>% 
+	group_by(continent) %>% 
+	summarise(mean_gdpPercap = mean(gdpPercap))
+```
+
+## Reshaping data frames
+
+- Previously we said that data frames have variables in columns and observations in rows
+- There may be different ways to interpret this in any given dataset
+  - Our dataset has country-by-year as the observation, and population, life expectancy, and GDP per capita as variables
+  - Sometimes it might make sense to have one row per country (observation), and multiple variables representing years
+  - These are known as 'long' and 'wide' format, respectively
+
+## Reshaping data frames
+
+- The `tidyr` package helps us transform our data from one shape to the other
+  + `pivot_wider()` takes a long dataset and makes it wider
+  + `pivot_longer()` takes a wide dataset and makes it longer
+- Recall our original dataset
+
+```{r}
+#| echo: true
+gapminder
+```
+
+## Reshaping data frames
+
+- We can reshape this to be wider (one row per country)
+
+```{r}
+#| echo: true
+gapminder_wide <- gapminder %>% 
+  pivot_wider(id_cols = c(country, continent),
+              names_from = year, values_from = c(pop, lifeExp, gdpPercap))
+gapminder_wide
+```
+
+## Reshaping data frames
+
+- Often raw data will come in a wide format, and we want to reshape it longer for data analysis
+
+```{r}
+#| echo: true
+gapminder_wide %>% 
+  pivot_longer(pop_1952:gdpPercap_2007,
+               names_to = c(".value", "year"), names_sep = "_")
+```
+
+## Other `tidyverse` packages
+
+- We'll come back to data visualisation with `ggplot2` in a later session
+- `purrr` provides tools for functional programming
+  - If we have several similar datasets, or subgroups within our dataset, we don't want to write out/copy-and-paste our code separately for each one
+  - With `purrr`, we can use `map()` (and similar) to apply a function to multiple inputs and extract all of the outputs
+- `stringr` and `forcats` are worth looking at if you need to work with string or factor variables -- we won't cover them here
+
+## Resources
+
+- This material was adapted from the Data Carpentries' 'R for Social Scientists' course (<https://preview.carpentries.org/r-socialsci/index.html>)
+- Hands-On Programming with R (<https://rstudio-education.github.io/hopr>)
+  - An introduction to programming in R (for non-programmers!)
+- R for Data Science (<https://r4ds.hadley.nz>)
+  - An excellent practical introduction to using the tidyverse
+- Advanced R (<https://adv-r.hadley.nz>) and R Packages (<https://r-pkgs.org>)
+  - More advanced -- good next steps once you're a bit more comfortable using R
+
+# Data analysis in R (regression) {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
+
+# Data visualisation {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
+
+## Data visualisation with `ggplot2`
+
+- There are a lot of tools available to create plots in R
+  - `ggplot2` is the most well-developed and widely used
+- We generally want data in long format for plotting
+  - One column for each variable
+  - One row for each observation
+- We'll use the `gapminder` dataset from the previous session
+
+```{r}
+#| echo: true
+library(tidyverse)
+gapminder <- read_csv(here::here("raw_data/gapminder_data.csv"))
+```
+
+## The grammar of graphics
+
+- dataset -- self-explanatory
+- geom -- the geometric object used to represent the data
+- mappings -- which features of the geom represent which variables in the data
+- stats -- transformations of the data before plotting
+- position -- to avoid overplotting data points
+- coordinate system -- how the x and y axes are plotted
+- faceting scheme -- split the plot by subgroups
+
+## Data visualisation with `ggplot2` {.smaller}
+
+- That's the theory
+- In practice, the easiest way is to build the plot up step-by-step (trial-and-error)
+  - start with the basic `ggplot` object
+
+```{.r}
+ggplot(data = gapminder)
+```
+
+:::{.fragment fragment-index=1}
+![](images/ggplot-blank.png){.absolute .fragment fragment-index=2 .fade-out top=100 left=200 width=550 height=550}
+:::
+
+:::{.fragment fragment-index=2}
+- you can specify (some of) the mappings at this stage
+
+```{.r}
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))
+```
+:::
+
+::: {.fragment .fade-in fragment-index=3}
+![](images/ggplot-axes.png){.absolute .fragment .fade-out top=100 left=200 width=550 height=550}
+:::
+
+# Data analysis workflows and project organisation {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
+
+## Project folder organisation
+
+![](images/bad_layout.png){.fragment}
+
+# Writing reports in R {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
+
+# Automation {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
+
+# Programming in R {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}

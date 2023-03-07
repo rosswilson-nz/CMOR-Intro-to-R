@@ -18,82 +18,126 @@
   <link rel="stylesheet" href="CMOR-intro-to-R_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="CMOR-intro-to-R_files/libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
+    <style type="text/css">
+
+      .reveal div.sourceCode {
+        margin: 0;
+        overflow: auto;
       }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
-  </style>
+
+      .reveal div.hanging-indent {
+        margin-left: 1em;
+        text-indent: -1em;
+      }
+
+      .reveal .slide:not(.center) {
+        height: 100%;
+        <% if (scrollable) { %>overflow-y: auto;<% } %>
+      }
+
+      .reveal .slide.scrollable {
+        overflow-y: auto;
+      }
+
+      .reveal .footnotes {
+        height: 100%;
+        overflow-y: auto;
+      }
+
+      .reveal .slide .absolute {
+        position: absolute;
+        display: block;
+      }
+
+      .reveal .footnotes ol {
+        counter-reset: ol;
+        list-style-type: none; 
+        margin-left: 0;
+      }
+
+      .reveal .footnotes ol li:before {
+        counter-increment: ol;
+        content: counter(ol) ". "; 
+      }
+
+      .reveal .footnotes ol li > p:first-child {
+        display: inline-block;
+      }
+
+
+      .reveal .slide ul,
+      .reveal .slide ol {
+        margin-bottom: 0.5em;
+      }
+
+      .reveal .slide ul li,
+      .reveal .slide ol li {
+        margin-top: 0.4em;
+        margin-bottom: 0.2em;
+      }
+      
+      .reveal .slide ul li li,
+      .reveal .slide ol li li {
+      	font-size: 0.8em;
+      }
+
+      .reveal .slide ul li li li,
+      .reveal .slide ol li li li {
+      	font-size: 0.64em;
+      }
+
+      .reveal .slide ul[role="tablist"] li {
+        margin-bottom: 0;
+      }
+
+      .reveal .slide ul li > *:first-child,
+      .reveal .slide ol li > *:first-child {
+        margin-block-start: 0;
+      }
+      .reveal .slide ul li > *:last-child,
+      .reveal .slide ol li > *:last-child {
+        margin-block-end: 0;
+      }
+
+      .reveal .slide .columns:nth-child(3) {
+        margin-block-start: 0.8em;
+      }
+
+      .reveal blockquote {
+        box-shadow: none;
+      }
+
+      .reveal .tippy-content>* {
+        margin-top: 0.2em;
+        margin-bottom: 0.7em;
+      }
+
+      .reveal .tippy-content>*:last-child {
+        margin-bottom: 0.2em;
+      }
+
+      .reveal .slide > img.stretch.quarto-figure-center,
+      .reveal .slide > img.r-stretch.quarto-figure-center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto; 
+      }
+
+      .reveal .slide > img.stretch.quarto-figure-left,
+      .reveal .slide > img.r-stretch.quarto-figure-left  {
+        display: block;
+        margin-left: 0;
+        margin-right: auto; 
+      }
+
+      .reveal .slide > img.stretch.quarto-figure-right,
+      .reveal .slide > img.r-stretch.quarto-figure-right  {
+        display: block;
+        margin-left: auto;
+        margin-right: 0; 
+      }
+
+    </style>  
   <link rel="stylesheet" href="CMOR-intro-to-R_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="CMOR-intro-to-R_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="CMOR-intro-to-R_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -388,22 +432,14 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
+<section id="title-slide" data-background-image="images/title-background.jpg" data-background-repeat="no-repeat" data-background-size="contain" class="center">
   <h1 class="title">Introduction to R</h1>
   <p class="subtitle">CMOR Lunch’n’Learn</p>
-
-<div class="quarto-title-authors">
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Ross Wilson 
-</div>
-</div>
-</div>
-
   <p class="date">8 March 2023</p>
+  <p class="author">Ross Wilson</p>
 </section>
 <section>
-<section id="getting-started" class="title-slide slide level1 center">
+<section id="getting-started" class="title-slide slide level1 center" data-background-image="images/title-background.jpg" data-background-size="contain" data-background-repeat="no-repeat" style="text-align:right;">
 <h1>Getting Started</h1>
 
 </section>
@@ -422,7 +458,7 @@ Ross Wilson
 <section id="why-learn-r" class="slide level2">
 <h2>Why learn R?</h2>
 <ul>
-<li>Powerful and extendsible
+<li>Powerful and extensible
 <ul>
 <li>Pretty much any statistical analysis you want to do can be done in R</li>
 </ul></li>
@@ -457,34 +493,34 @@ Ross Wilson
 <p><img data-src="images/rstudio-screenshot.png"></p>
 </div>
 <div class="fragment">
-<div class="absolute" style="border-style:solid; border-width:5px; border-color:red;top: 170px; left: 0px; width: 609px; height: 161px; ">
+<div class="absolute" style="border-style:solid; border-width:5px; border-color:red;top: 155px; left: 0px; width: 609px; height: 161px; ">
 
 </div>
-<div class="absolute" style="text-align:center; color:red; font-weight:bold;top: 220px; left: 0px; width: 609px; height: 50px; ">
+<div class="absolute" style="text-align:center; color:red; font-weight:bold;top: 205px; left: 0px; width: 609px; height: 50px; ">
 <p>Source</p>
 </div>
 </div>
 <div class="fragment">
-<div class="absolute" style="border-style:solid; border-width:5px; border-color:red;top: 336px; left: 0px; width: 609px; height: 311px; ">
+<div class="absolute" style="border-style:solid; border-width:5px; border-color:red;top: 321px; left: 0px; width: 609px; height: 311px; ">
 
 </div>
-<div class="absolute" style="text-align:center; color:red; font-weight:bold;top: 440px; left: 0px; width: 609px; ">
+<div class="absolute" style="text-align:center; color:red; font-weight:bold;top: 425px; left: 0px; width: 609px; ">
 <p>Console</p>
 </div>
 </div>
 <div class="fragment">
-<div class="absolute" style="border-style:solid; border-width:5px; border-color:red;top: 170px; left: 614px; width: 373px; height: 180px; ">
+<div class="absolute" style="border-style:solid; border-width:5px; border-color:red;top: 155px; left: 614px; width: 373px; height: 180px; ">
 
 </div>
-<div class="absolute" style="text-align:center; color:red; font-weight:bold;top: 205px; left: 614px; width: 373px; ">
+<div class="absolute" style="text-align:center; color:red; font-weight:bold;top: 190px; left: 614px; width: 373px; ">
 <p>Environment/<br>History</p>
 </div>
 </div>
 <div class="fragment">
-<div class="absolute" style="border-style:solid; border-width:5px; border-color:red;top: 355px; left: 614px; width: 373px; height: 292px; ">
+<div class="absolute" style="border-style:solid; border-width:5px; border-color:red;top: 340px; left: 614px; width: 373px; height: 292px; ">
 
 </div>
-<div class="absolute" style="text-align:center; color:red; font-weight:bold;top: 420px; left: 614px; width: 373px; ">
+<div class="absolute" style="text-align:center; color:red; font-weight:bold;top: 405px; left: 614px; width: 373px; ">
 <p>Files/Plots/<br>Packages/<br>Help/Viewer</p>
 </div>
 </div>
@@ -513,7 +549,7 @@ Ross Wilson
 <pre><code>[1] 8</code></pre>
 </div>
 </div>
-<p><img data-src="images/environment-pane.png" class="absolute fragment" style="top: 400px; left: 500px; "></p>
+<p><img data-src="images/environment-pane.png" class="absolute fragment" style="top: 300px; left: 250px; "></p>
 </div>
 </section>
 <section id="starting-with-r-1" class="slide level2">
@@ -529,7 +565,7 @@ Ross Wilson
 <pre><code>[1] 16</code></pre>
 </div>
 </div>
-<p><img data-src="images/environment-pane-2.png" class="absolute fragment" style="top: 150px; left: 500px; "></p>
+<p><img data-src="images/environment-pane-2.png" class="absolute fragment" style="top: 115px; left: 250px; "></p>
 </div>
 <div class="fragment">
 <p><br></p>
@@ -613,13 +649,13 @@ Ross Wilson
 <pre><code>[1] "apple"  "banana"</code></pre>
 </div>
 </div>
-<div class="absolute fragment smaller" style="background:#ffffff; border-style:solid; border-width:medium; border-color:red; font-size:0.7em;top: 500px; left: 500px; width: 600px; ">
+<div class="absolute fragment smaller" style="background:#ffffff; border-style:solid; border-width:medium; border-color:red; font-size:0.7em;top: 400px; left: 300px; width: 500px; ">
 <p><strong>The quotes are essential:</strong></p>
 <p>otherwise R will look for the names ‘apple’ and ‘banana’ (and use the values we have already defined for those names, not the character strings)</p>
 </div>
 </div>
 </section>
-<section id="data-types-1" class="slide level2 smaller">
+<section id="data-types-1" class="slide level2">
 <h2>Data types</h2>
 <ul>
 <li>The basic data types are <code>numeric</code>, <code>character</code>, <code>logical</code> (<code>TRUE</code> and <code>FALSE</code> values only), and <code>integer</code>
@@ -663,7 +699,7 @@ Ross Wilson
 </div>
 </section></section>
 <section>
-<section id="working-with-data-frames" class="title-slide slide level1 center">
+<section id="working-with-data-frames" class="title-slide slide level1 center" data-background-image="images/title-background.jpg" data-background-size="contain" data-background-repeat="no-repeat" style="text-align:right;">
 <h1>Working with Data Frames</h1>
 
 </section>
@@ -682,7 +718,7 @@ Ross Wilson
 <li>We can read data from Excel or CSV spreadsheets, data files from Stata etc, previously saved R data frames, and much else…</li>
 </ul>
 </section>
-<section id="the-tidyverse" class="slide level2 smaller">
+<section id="the-tidyverse" class="slide level2">
 <h2>The <code>tidyverse</code></h2>
 <ul>
 <li>The ‘<code>tidyverse</code>’ is a collection of packages created by the company that makes RStudio</li>
@@ -698,10 +734,387 @@ Ross Wilson
 <li><code>forcats</code>: working with factor variables</li>
 </ul></li>
 </ul>
+</section>
+<section id="data-frames-1" class="slide level2">
+<h2>Data frames</h2>
+<ul>
+<li>Reading in a data frame with <code>read_csv()</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb24-2"><a href="#cb24-2"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"raw_data/gapminder_data.csv"</span>))</span>
+<span id="cb24-3"><a href="#cb24-3"></a>gapminder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,704 × 6
+   country      year      pop continent lifeExp gdpPercap
+   &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+ 1 Afghanistan  1952  8425333 Asia         28.8      779.
+ 2 Afghanistan  1957  9240934 Asia         30.3      821.
+ 3 Afghanistan  1962 10267083 Asia         32.0      853.
+ 4 Afghanistan  1967 11537966 Asia         34.0      836.
+ 5 Afghanistan  1972 13079460 Asia         36.1      740.
+ 6 Afghanistan  1977 14880372 Asia         38.4      786.
+ 7 Afghanistan  1982 12881816 Asia         39.9      978.
+ 8 Afghanistan  1987 13867957 Asia         40.8      852.
+ 9 Afghanistan  1992 16317921 Asia         41.7      649.
+10 Afghanistan  1997 22227415 Asia         41.8      635.
+# … with 1,694 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="manipulating-data-frames-with-dplyr" class="slide level2">
+<h2>Manipulating data frames with <code>dplyr</code></h2>
+<ul>
+<li><code>select()</code> only a subset of variables</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">select</span>(gapminder, year, country, gdpPercap)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,704 × 3
+    year country     gdpPercap
+   &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;
+ 1  1952 Afghanistan      779.
+ 2  1957 Afghanistan      821.
+ 3  1962 Afghanistan      853.
+ 4  1967 Afghanistan      836.
+ 5  1972 Afghanistan      740.
+ 6  1977 Afghanistan      786.
+ 7  1982 Afghanistan      978.
+ 8  1987 Afghanistan      852.
+ 9  1992 Afghanistan      649.
+10  1997 Afghanistan      635.
+# … with 1,694 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="manipulating-data-frames-with-dplyr-1" class="slide level2">
+<h2>Manipulating data frames with <code>dplyr</code></h2>
+<ul>
+<li><code>filter()</code> only a subset of observations</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">filter</span>(gapminder, continent <span class="sc">==</span> <span class="st">"Europe"</span>, year <span class="sc">==</span> <span class="dv">2007</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 6
+   country                 year      pop continent lifeExp gdpPercap
+   &lt;chr&gt;                  &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+ 1 Albania                 2007  3600523 Europe       76.4     5937.
+ 2 Austria                 2007  8199783 Europe       79.8    36126.
+ 3 Belgium                 2007 10392226 Europe       79.4    33693.
+ 4 Bosnia and Herzegovina  2007  4552198 Europe       74.9     7446.
+ 5 Bulgaria                2007  7322858 Europe       73.0    10681.
+ 6 Croatia                 2007  4493312 Europe       75.7    14619.
+ 7 Czech Republic          2007 10228744 Europe       76.5    22833.
+ 8 Denmark                 2007  5468120 Europe       78.3    35278.
+ 9 Finland                 2007  5238460 Europe       79.3    33207.
+10 France                  2007 61083916 Europe       80.7    30470.
+# … with 20 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="manipulating-data-frames-with-dplyr-2" class="slide level2">
+<h2>Manipulating data frames with <code>dplyr</code></h2>
+<ul>
+<li><code>mutate()</code> to create new variables</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">mutate</span>(gapminder, <span class="at">gdp_billion =</span> gdpPercap <span class="sc">*</span> pop <span class="sc">/</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,704 × 7
+   country      year      pop continent lifeExp gdpPercap gdp_billion
+   &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+ 1 Afghanistan  1952  8425333 Asia         28.8      779.        6.57
+ 2 Afghanistan  1957  9240934 Asia         30.3      821.        7.59
+ 3 Afghanistan  1962 10267083 Asia         32.0      853.        8.76
+ 4 Afghanistan  1967 11537966 Asia         34.0      836.        9.65
+ 5 Afghanistan  1972 13079460 Asia         36.1      740.        9.68
+ 6 Afghanistan  1977 14880372 Asia         38.4      786.       11.7 
+ 7 Afghanistan  1982 12881816 Asia         39.9      978.       12.6 
+ 8 Afghanistan  1987 13867957 Asia         40.8      852.       11.8 
+ 9 Afghanistan  1992 16317921 Asia         41.7      649.       10.6 
+10 Afghanistan  1997 22227415 Asia         41.8      635.       14.1 
+# … with 1,694 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="manipulating-data-frames-with-dplyr-3" class="slide level2">
+<h2>Manipulating data frames with <code>dplyr</code></h2>
+<ul>
+<li><code>summarise()</code> to calculate summary statistics</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">summarise</span>(gapminder, <span class="at">mean_gdpPercap =</span> <span class="fu">mean</span>(gdpPercap))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  mean_gdpPercap
+           &lt;dbl&gt;
+1          7215.</code></pre>
+</div>
+</div>
+<div class="fragment">
+<ul>
+<li>This is most useful in conjunction with <code>group_by()</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">summarise</span>(<span class="fu">group_by</span>(gapminder, continent),</span>
+<span id="cb34-2"><a href="#cb34-2"></a>                    <span class="at">mean_gdpPercap =</span> <span class="fu">mean</span>(gdpPercap))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  continent mean_gdpPercap
+  &lt;chr&gt;              &lt;dbl&gt;
+1 Africa             2194.
+2 Americas           7136.
+3 Asia               7902.
+4 Europe            14469.
+5 Oceania           18622.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="manipulating-data-frames-with-dplyr-4" class="slide level2">
+<h2>Manipulating data frames with <code>dplyr</code></h2>
+<ul>
+<li><p>The power of <code>dplyr</code> is in combining several commands using ‘pipes’</p></li>
+<li><p>The previous command could be written:</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="#cb36-2"></a>    <span class="fu">group_by</span>(continent) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-3"><a href="#cb36-3"></a>    <span class="fu">summarise</span>(<span class="at">mean_gdpPercap =</span> <span class="fu">mean</span>(gdpPercap))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  continent mean_gdpPercap
+  &lt;chr&gt;              &lt;dbl&gt;
+1 Africa             2194.
+2 Americas           7136.
+3 Asia               7902.
+4 Europe            14469.
+5 Oceania           18622.</code></pre>
+</div>
+</div>
+</section>
+<section id="reshaping-data-frames" class="slide level2">
+<h2>Reshaping data frames</h2>
+<ul>
+<li>Previously we said that data frames have variables in columns and observations in rows</li>
+<li>There may be different ways to interpret this in any given dataset
+<ul>
+<li>Our dataset has country-by-year as the observation, and population, life expectancy, and GDP per capita as variables</li>
+<li>Sometimes it might make sense to have one row per country (observation), and multiple variables representing years</li>
+<li>These are known as ‘long’ and ‘wide’ format, respectively</li>
+</ul></li>
+</ul>
+</section>
+<section id="reshaping-data-frames-1" class="slide level2">
+<h2>Reshaping data frames</h2>
+<ul>
+<li>The <code>tidyr</code> package helps us transform our data from one shape to the other
+<ul>
+<li><code>pivot_wider()</code> takes a long dataset and makes it wider</li>
+<li><code>pivot_longer()</code> takes a wide dataset and makes it longer</li>
+</ul></li>
+<li>Recall our original dataset</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>gapminder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,704 × 6
+   country      year      pop continent lifeExp gdpPercap
+   &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+ 1 Afghanistan  1952  8425333 Asia         28.8      779.
+ 2 Afghanistan  1957  9240934 Asia         30.3      821.
+ 3 Afghanistan  1962 10267083 Asia         32.0      853.
+ 4 Afghanistan  1967 11537966 Asia         34.0      836.
+ 5 Afghanistan  1972 13079460 Asia         36.1      740.
+ 6 Afghanistan  1977 14880372 Asia         38.4      786.
+ 7 Afghanistan  1982 12881816 Asia         39.9      978.
+ 8 Afghanistan  1987 13867957 Asia         40.8      852.
+ 9 Afghanistan  1992 16317921 Asia         41.7      649.
+10 Afghanistan  1997 22227415 Asia         41.8      635.
+# … with 1,694 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="reshaping-data-frames-2" class="slide level2">
+<h2>Reshaping data frames</h2>
+<ul>
+<li>We can reshape this to be wider (one row per country)</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>gapminder_wide <span class="ot">&lt;-</span> gapminder <span class="sc">%&gt;%</span> </span>
+<span id="cb40-2"><a href="#cb40-2"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(country, continent),</span>
+<span id="cb40-3"><a href="#cb40-3"></a>              <span class="at">names_from =</span> year, <span class="at">values_from =</span> <span class="fu">c</span>(pop, lifeExp, gdpPercap))</span>
+<span id="cb40-4"><a href="#cb40-4"></a>gapminder_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 142 × 38
+   country     continent pop_1952 pop_1957 pop_1962 pop_1967 pop_1972 pop_1977
+   &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+ 1 Afghanistan Asia       8425333  9240934 10267083 11537966 13079460 14880372
+ 2 Albania     Europe     1282697  1476505  1728137  1984060  2263554  2509048
+ 3 Algeria     Africa     9279525 10270856 11000948 12760499 14760787 17152804
+ 4 Angola      Africa     4232095  4561361  4826015  5247469  5894858  6162675
+ 5 Argentina   Americas  17876956 19610538 21283783 22934225 24779799 26983828
+ 6 Australia   Oceania    8691212  9712569 10794968 11872264 13177000 14074100
+ 7 Austria     Europe     6927772  6965860  7129864  7376998  7544201  7568430
+ 8 Bahrain     Asia        120447   138655   171863   202182   230800   297410
+ 9 Bangladesh  Asia      46886859 51365468 56839289 62821884 70759295 80428306
+10 Belgium     Europe     8730405  8989111  9218400  9556500  9709100  9821800
+# … with 132 more rows, and 30 more variables: pop_1982 &lt;dbl&gt;, pop_1987 &lt;dbl&gt;,
+#   pop_1992 &lt;dbl&gt;, pop_1997 &lt;dbl&gt;, pop_2002 &lt;dbl&gt;, pop_2007 &lt;dbl&gt;,
+#   lifeExp_1952 &lt;dbl&gt;, lifeExp_1957 &lt;dbl&gt;, lifeExp_1962 &lt;dbl&gt;,
+#   lifeExp_1967 &lt;dbl&gt;, lifeExp_1972 &lt;dbl&gt;, lifeExp_1977 &lt;dbl&gt;,
+#   lifeExp_1982 &lt;dbl&gt;, lifeExp_1987 &lt;dbl&gt;, lifeExp_1992 &lt;dbl&gt;,
+#   lifeExp_1997 &lt;dbl&gt;, lifeExp_2002 &lt;dbl&gt;, lifeExp_2007 &lt;dbl&gt;,
+#   gdpPercap_1952 &lt;dbl&gt;, gdpPercap_1957 &lt;dbl&gt;, gdpPercap_1962 &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="reshaping-data-frames-3" class="slide level2">
+<h2>Reshaping data frames</h2>
+<ul>
+<li>Often raw data will come in a wide format, and we want to reshape it longer for data analysis</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>gapminder_wide <span class="sc">%&gt;%</span> </span>
+<span id="cb42-2"><a href="#cb42-2"></a>  <span class="fu">pivot_longer</span>(pop_1952<span class="sc">:</span>gdpPercap_2007,</span>
+<span id="cb42-3"><a href="#cb42-3"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">".value"</span>, <span class="st">"year"</span>), <span class="at">names_sep =</span> <span class="st">"_"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,704 × 6
+   country     continent year       pop lifeExp gdpPercap
+   &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
+ 1 Afghanistan Asia      1952   8425333    28.8      779.
+ 2 Afghanistan Asia      1957   9240934    30.3      821.
+ 3 Afghanistan Asia      1962  10267083    32.0      853.
+ 4 Afghanistan Asia      1967  11537966    34.0      836.
+ 5 Afghanistan Asia      1972  13079460    36.1      740.
+ 6 Afghanistan Asia      1977  14880372    38.4      786.
+ 7 Afghanistan Asia      1982  12881816    39.9      978.
+ 8 Afghanistan Asia      1987  13867957    40.8      852.
+ 9 Afghanistan Asia      1992  16317921    41.7      649.
+10 Afghanistan Asia      1997  22227415    41.8      635.
+# … with 1,694 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="other-tidyverse-packages" class="slide level2">
+<h2>Other <code>tidyverse</code> packages</h2>
+<ul>
+<li>We’ll come back to data visualisation with <code>ggplot2</code> in a later session</li>
+<li><code>purrr</code> provides tools for functional programming
+<ul>
+<li>If we have several similar datasets, or subgroups within our dataset, we don’t want to write out/copy-and-paste our code separately for each one</li>
+<li>With <code>purrr</code>, we can use <code>map()</code> (and similar) to apply a function to multiple inputs and extract all of the outputs</li>
+</ul></li>
+<li><code>stringr</code> and <code>forcats</code> are worth looking at if you need to work with string or factor variables – we won’t cover them here</li>
+</ul>
+</section>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
+<ul>
+<li>This material was adapted from the Data Carpentries’ ‘R for Social Scientists’ course (<a href="https://preview.carpentries.org/r-socialsci/index.html" class="uri">https://preview.carpentries.org/r-socialsci/index.html</a>)</li>
+<li>Hands-On Programming with R (<a href="https://rstudio-education.github.io/hopr" class="uri">https://rstudio-education.github.io/hopr</a>)
+<ul>
+<li>An introduction to programming in R (for non-programmers!)</li>
+</ul></li>
+<li>R for Data Science (<a href="https://r4ds.hadley.nz" class="uri">https://r4ds.hadley.nz</a>)
+<ul>
+<li>An excellent practical introduction to using the tidyverse</li>
+</ul></li>
+<li>Advanced R (<a href="https://adv-r.hadley.nz" class="uri">https://adv-r.hadley.nz</a>) and R Packages (<a href="https://r-pkgs.org" class="uri">https://r-pkgs.org</a>)
+<ul>
+<li>More advanced – good next steps once you’re a bit more comfortable using R</li>
+</ul></li>
+</ul>
+</section></section>
+<section id="data-analysis-in-r-regression" class="title-slide slide level1 center" data-background-image="images/title-background.jpg" data-background-size="contain" data-background-repeat="no-repeat" style="text-align:right;">
+<h1>Data analysis in R (regression)</h1>
+
+</section>
+
+<section>
+<section id="data-visualisation" class="title-slide slide level1 center" data-background-image="images/title-background.jpg" data-background-size="contain" data-background-repeat="no-repeat" style="text-align:right;">
+<h1>Data visualisation</h1>
+
+</section>
+<section id="data-visualisation-with-ggplot2" class="slide level2">
+<h2>Data visualisation with <code>ggplot2</code></h2>
+<ul>
+<li>There are a lot of tools available to create plots in R
+<ul>
+<li><code>ggplot2</code> is the most well-developed and widely used</li>
+</ul></li>
+<li>We generally want data in long format for plotting
+<ul>
+<li>One column for each variable</li>
+<li>One row for each observation</li>
+</ul></li>
+<li>We’ll use the <code>gapminder</code> dataset from the previous session</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb44-2"><a href="#cb44-2"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"raw_data/gapminder_data.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="the-grammar-of-graphics" class="slide level2">
+<h2>The grammar of graphics</h2>
+<ul>
+<li>dataset – self-explanatory</li>
+<li>geom – the geometric object used to represent the data</li>
+<li>mappings – which features of the geom represent which variables in the data</li>
+<li>stats – transformations of the data before plotting</li>
+<li>position – to avoid overplotting data points</li>
+<li>coordinate system – how the x and y axes are plotted</li>
+<li>faceting scheme – split the plot by subgroups</li>
+</ul>
+</section>
+<section id="data-visualisation-with-ggplot2-1" class="slide level2 smaller">
+<h2>Data visualisation with <code>ggplot2</code></h2>
+<ul>
+<li>That’s the theory</li>
+<li>In practice, the easiest way is to build the plot up step-by-step (trial-and-error)
+<ul>
+<li>start with the basic <code>ggplot</code> object</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> gapminder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment" data-fragment-index="1">
+<p><img data-src="images/ggplot-blank.png" class="absolute fragment fade-out" style="top: 100px; left: 200px; width: 550px; height: 550px; " data-fragment-index="2"></p>
+</div>
+<div class="fragment" data-fragment-index="2">
+<ul>
+<li>you can specify (some of) the mappings at this stage</li>
+</ul>
+<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> gapminder, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment fade-in" data-fragment-index="3">
+<p><img data-src="images/ggplot-axes.png" class="absolute fragment fade-out" style="top: 100px; left: 200px; width: 550px; height: 550px; "></p>
+</div>
+</section></section>
+<section>
+<section id="data-analysis-workflows-and-project-organisation" class="title-slide slide level1 center" data-background-image="images/title-background.jpg" data-background-size="contain" data-background-repeat="no-repeat" style="text-align:right;">
+<h1>Data analysis workflows and project organisation</h1>
+
+</section>
+<section id="project-folder-organisation" class="slide level2">
+<h2>Project folder organisation</h2>
+
+<img data-src="images/bad_layout.png" class="fragment r-stretch"></section></section>
+<section id="writing-reports-in-r" class="title-slide slide level1 center" data-background-image="images/title-background.jpg" data-background-size="contain" data-background-repeat="no-repeat" style="text-align:right;">
+<h1>Writing reports in R</h1>
+
+</section>
+
+<section id="automation" class="title-slide slide level1 center" data-background-image="images/title-background.jpg" data-background-size="contain" data-background-repeat="no-repeat" style="text-align:right;">
+<h1>Automation</h1>
+
+</section>
+
+<section id="programming-in-r" class="title-slide slide level1 center" data-background-image="images/title-background.jpg" data-background-size="contain" data-background-repeat="no-repeat" style="text-align:right;">
+<h1>Programming in R</h1>
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
@@ -727,7 +1140,7 @@ Ross Wilson
       // https://revealjs.com/config/
       Reveal.initialize({
 'controlsAuto': true,
-'previewLinksAuto': false,
+'previewLinksAuto': true,
 'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",

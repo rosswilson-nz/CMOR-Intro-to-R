@@ -2,6 +2,8 @@
 
 // fonts
 $font-family-sans-serif: sans-serif !default;
+$presentation-font-size-root: 32px !default;
+$presentation-font-smaller: 0.8 !default;
 
 // colors
 $body-bg: #fff !default;
@@ -12,3 +14,19 @@ $presentation-heading-color: #002060 !default;
 
 // headings
 $presentation-heading-font: sans-serif !default;
+
+/*-- scss:mixins --*/
+@mixin bodyBackground() {
+	background: {
+		image: url("/images/background.jpg");
+	  size: contain;
+	  repeat: no-repeat;
+	  position: center;
+	}
+}
+
+/*-- scss:rules --*/
+#title-slide .subtitle {
+	margin-top: 100px;
+	margin-bottom: 0px;
+}
