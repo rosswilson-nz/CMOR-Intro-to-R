@@ -37,10 +37,12 @@ options(pillar.min_title_chars = 8)
 
 - Powerful and extensible
   - Pretty much any statistical analysis you want to do can be done in R
+  - There are a huge number of freely-available user-written packages that provide all sorts of additional functionality
 - Reproducibility
-  - By writing R scripts (code) for your analyses, they can be easily checked/replicated/updated/adapted, by yourself and others
+  - By writing R scripts (code) for your analyses, they can be easily checked/replicated/ updated/adapted, by yourself and others
 - High-quality graphics
   - R has a lot of plotting functions to help you produce publication-quality figures
+
 
 ## Getting set up
 
@@ -58,7 +60,7 @@ options(pillar.min_title_chars = 8)
 :::
 
 :::{.fragment}
-:::{.absolute top="155" left="0" width="609" height="161" style="border-style:solid; border-width:5px; border-color:red;"}
+:::{.absolute top="155" left="0" width="609" height="161" style="border-style:solid; border-width:5px; border-color:red; background: rgba(255, 255, 255, 0.4);"}
 :::
 :::{.absolute top="205" left="0" width="609" height="50" style="text-align:center; color:red; font-weight:bold;"}
 Source
@@ -66,7 +68,7 @@ Source
 :::
 
 :::{.fragment}
-:::{.absolute top="321" left="0" width="609" height="311" style="border-style:solid; border-width:5px; border-color:red;"}
+:::{.absolute top="321" left="0" width="609" height="311" style="border-style:solid; border-width:5px; border-color:red; background: rgba(255, 255, 255, 0.4);"}
 :::
 :::{.absolute top="425" left="0" width="609" style="text-align:center; color:red; font-weight:bold;"}
 Console
@@ -74,7 +76,7 @@ Console
 :::
 
 :::{.fragment}
-:::{.absolute top="155" left="614" width="373" height="180" style="border-style:solid; border-width:5px; border-color:red;"}
+:::{.absolute top="155" left="614" width="373" height="180" style="border-style:solid; border-width:5px; border-color:red; background: rgba(255, 255, 255, 0.4);"}
 :::
 :::{.absolute top="190" left="614" width="373" style="text-align:center; color:red; font-weight:bold;"}
 Environment/<br>History
@@ -82,7 +84,7 @@ Environment/<br>History
 :::
 
 :::{.fragment}
-:::{.absolute top="340" left="614" width="373" height="292" style="border-style:solid; border-width:5px; border-color:red;"}
+:::{.absolute top="340" left="614" width="373" height="292" style="border-style:solid; border-width:5px; border-color:red; background: rgba(255, 255, 255, 0.4);"}
 :::
 :::{.absolute top="405" left="614" width="373" style="text-align:center; color:red; font-weight:bold;"}
 Files/Plots/<br>Packages/<br>Help/Viewer
@@ -106,6 +108,7 @@ Files/Plots/<br>Packages/<br>Help/Viewer
 
 ```{r}
 #| echo: true
+#| code-line-numbers: "|1|2"
 x <- 3 + 5
 x
 ```
@@ -173,7 +176,10 @@ times2(x)
 
 . . .
 
-- Separating your code out into discrete functions makes it shorter, easier to follow, and less error prone
+- Separating your code out into discrete functions makes it
+  - shorter
+  - easier to follow
+  - less error prone
 
 ## Data types
 
@@ -199,7 +205,7 @@ c("apple", "banana")
 :::{.absolute .fragment .smaller top=400 left=300 width=500 style="background:#ffffff; border-style:solid; border-width:medium; border-color:red; font-size:0.7em;"}
 **The quotes are essential:**
 
-otherwise R will look for the names 'apple' and 'banana' (and use the values we have already defined for those names, not the character strings)
+otherwise R will look for the names 'apple' and 'banana' (if these names exist, it will use the values they refer to instead of the character strings; if they don't it will give an error)
 :::
 
 ## Data types
