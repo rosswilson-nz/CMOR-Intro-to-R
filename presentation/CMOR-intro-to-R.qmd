@@ -15,6 +15,7 @@ format:
       - styles.html
       - title-slide.html
     preview-links: auto
+    margin: 0.2
 ---
 
 ```{r}
@@ -205,7 +206,7 @@ c("apple", "banana")
 :::{.absolute .fragment .smaller top=400 left=300 width=500 style="background:#ffffff; border-style:solid; border-width:medium; border-color:red; font-size:0.7em;"}
 **The quotes are essential:**
 
-otherwise R will look for the names 'apple' and 'banana' (if these names exist, it will use the values they refer to instead of the character strings; if they don't it will give an error)
+otherwise R will look for the names 'apple' and 'banana' (if these names exist, it will use the values they refer to instead of the character strings; if they don't, it will give an error)
 :::
 
 ## Data types
