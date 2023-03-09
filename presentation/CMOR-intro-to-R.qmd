@@ -803,6 +803,73 @@ plan <- list(
 
 # Writing reports in R {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
 
+## Data workflow
+
+![](images/linear-workflow.png){.absolute top=180 height=400 width=1500}
+
+![](images/workflow-arrows.png){.absolute .fragment top=55}
+
+::: {.absolute .fragment top=100 left=500 width=850 style="background:#F2F2F233;"}
+```{.r}
+plan <- list(
+  tar_file(words, download_words()),
+  tar_target(frequency_table, summarise_word_lengths(words)),
+  tar_target(histogram, create_histogram(frequency_table)),
+  tar_file(report, render_report("reports/report.rmd", frequency_table, histogram))
+)
+```
+:::
+
+::: {.absolute .fragment top=400 left=-100 width=500 style="background:#FFC20FCC; font-size:0.8em;"}
+Advantages:
+
+* Reported results are always kept up-to-date with data and analysis
+* Changes at any point along the workflow can be made easily and robustly
+:::
+
+---
+
+{{< video https://youtu.be/s3JldKoA0zw width="100%" height="100%" >}}
+
+## Data workflow
+
+![](images/linear-workflow.png){.absolute top=180 height=400 width=1500}
+
+![](images/workflow-arrows.png){.absolute top=55}
+
+::: {.absolute top=100 left=500 width=850 style="background:#F2F2F233;"}
+```{.r}
+plan <- list(
+  tar_file(words, download_words()),
+  tar_target(frequency_table, summarise_word_lengths(words)),
+  tar_target(histogram, create_histogram(frequency_table)),
+  tar_file(report, render_report("reports/report.rmd", frequency_table, histogram))
+)
+```
+:::
+
+::: {.absolute top=400 left=-100 width=500 style="background:#FFC20FCC; font-size:0.8em;"}
+Advantages:
+
+* Reported results are always kept up-to-date with data and analysis
+* Changes at any point along the workflow can be made easily and robustly
+:::
+
+## R Markdown
+
+{{< video https://vimeo.com/178485416?embedded=true&source=video_title&owner=22717988 width="100%" height="85%" >}}
+
+## Quarto
+
+* We'll focus on Quarto instead
+* Quarto is a relatively new tool very similar to RMarkdown
+  * Most of what you might read about RMarkdown also applies to Quarto
+  * see also <https://quarto.org> for documentation and guides
+
+---
+
+
+
 # Automation {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
 
 # Programming in R {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
