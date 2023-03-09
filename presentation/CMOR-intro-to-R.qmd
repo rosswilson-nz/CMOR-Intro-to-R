@@ -451,9 +451,355 @@ ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))
 
 # Data analysis workflows and project organisation {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
 
-## Project folder organisation
+## Reproducible research
 
-![](images/bad_layout.png){.fragment}
+* What is 'reproducibility'?
+  * Focus here is on *computational reproducibility* -- can your results be replicated by someone (or yourself!) with access to your data, code, etc.
+
+* Why might research not be reproducible?
+  * Raw data are not available or have been changed
+  * Intermediate steps taken to extract, clean, reshape, merge, or analyse data are not adequately recorded or described
+  * Software tools have changed or are no longer available since the analysis was conducted
+  * Errors in manually transcribing results from analysis software to final report (manuscript, etc.)
+
+## Reproducible research
+
+* Ensuring reproducibility (for others) can also have great benefits for you as the analyst/author
+  * When you come back to an analysis later, you know exactly what you did, why you did it, and how to replicate it if needed
+  * If data changes, errors are identified, or new analyses need to be conducted, your analysis and results can easily be updated
+  * The code and methods used in one project/analysis can be re-used in other work
+  * Keeping to a simple, standardised workflow for all projects allows you to switch easily & quickly between projects
+    * And prevents you having to make a whole bunch of new decisions every time you start something new
+
+---
+
+![](images/interconnected-tasks.png)
+
+## Key principles
+
+* Raw data stays raw
+* Source is real
+* Design for collaboration
+  * (including with your future self)
+* Consider version control
+* Automation?
+
+## Key principles -- Raw data
+
+* Raw data stays raw
+  * Make raw data files read-only
+  
+## Key principles - Raw data
+
+![](images/read-only.png)
+
+## Key principles -- Raw data
+
+* Raw data stays raw
+  * Make raw data files read-only
+  * Can be relaxed (temporarily) if needed, but avoids accidental changes
+  * Most (probably all) changes to data should be scripted (in R, Stata, etc.) rather than made directly in raw data files
+
+## Key principles
+
+* Raw data stays raw
+* Source is real
+* Design for collaboration
+  * (including with your future self)
+* Consider version control
+* Automation?
+
+## Key principles
+
+* Raw data stays raw
+* [Source is real]{style="color:Red;"}
+* Design for collaboration
+  * (including with your future self)
+* Consider version control
+* Automation?
+
+## Key principles -- Source files
+
+* Source is real...
+  * ...workspace is replaceable
+* Any individual R session is disposable and can be replaced/recreated at any time, if you have raw data and appropriate source code
+* Thinking in this way forces you to follow good reproducibility practices in your analysis workflow
+
+## Key principles -- Source files
+
+* What does 'Source is real' mean?
+  * Data import, cleaning, reshaping, wrangling, and analysis should all be conducted via script files
+    * or at least documented in thorough, step-by-step detail
+  * All source code should be saved (regularly!) so all of these steps can be reproduced at any time
+  * Important (or time-consuming) intermediate objects (cleaned datasets, figures, etc) should be explicitly saved, individually, to files (by script, not the mouse, if possible)
+
+## Key principles -- Source files
+
+* Start R with a blank slate, and restart often
+
+## Key principles -- Source files
+
+![](images/save-workspace.png)
+
+:::{.absolute top="330" left="130" width="260" height="72" style="border-style:solid; border-width:5px; border-color:red;"}
+:::
+
+## Key principles -- Source files
+
+* Start R with a blank slate, and restart often
+  * When you are running code interactively to try things out, you will be adding objects to the workspace, loading packages, etc
+  * If you inadvertently rely on these objects, packages, etc in your source files, you may not be able to reproduce your results in a new session later
+  * If you have saved source code and intermediate objects to file as you go, it is quick and easy to restart R (Ctrl+Shift+F10, in RStudio) regularly to check whether everything still works as expected
+    * It is much better to find this out after a few minutes than after a whole day’s work!
+
+## Key principles
+
+* Raw data stays raw
+* Source is real
+* Design for collaboration
+  * (including with your future self)
+* Consider version control
+* Automation?
+
+## Key principles
+
+* Raw data stays raw
+* Source is real
+* [Design for collaboration]{style="color:Red;"}
+  * [(including with your future self)]{style="color:Red;"}
+* Consider version control
+* Automation?
+
+## Key principles -- Design for collaboration
+
+. . .
+
+* An analysis directory like this makes it very difficult for anyone (including yourself later) to follow the steps required to reproduce your results
+
+---
+
+![](images/bad_layout.png)
+
+## Key principles -- Design for collaboration
+
+:::{.columns}
+
+::: {.column}
+* Much better to follow a logical structure (and the same across all of your projects)
+  * Set out high-level structure, e.g.
+    1. read raw data
+    2. tidy data for analysis
+    3. run analyses on tidy data
+    4. collate report/results of analyses
+  * Put raw data in its own directory (and read-only)
+  * Consider other structures/subfolders as appropriate for your project
+:::
+
+:::{.column}
+![](images/better-layout.png)
+:::
+
+:::
+
+## Key principles -- Design for collaboration
+
+* Break up complicated or repeated analysis steps into discrete functions
+* Give functions and variables meaningful names
+* Use comments liberally
+
+## Key principles
+
+* Raw data stays raw
+* Source is real
+* Design for collaboration
+  * (including with your future self)
+* Consider version control
+* Automation?
+
+## Key principles
+
+* Raw data stays raw
+* Source is real
+* Design for collaboration
+  * (including with your future self)
+* [Consider version control]{style="color:Red;"}
+* Automation?
+
+## Key principles -- Version control
+
+* Keeping track of changes to data and code (and being able to revert to a previous version if things go wrong) is critical for reproducible research
+
+* This is particularly true when collaborating with others
+
+* The best way to do this is with a version control system such as Git
+
+## Key principles -- Version control
+
+* We won't go into this in detail today, but a quick Getting Started guide:
+  * Register a GitHub account (<https://github.com>)
+  * Install Git (<https://git-scm.com>) and complete basic setup
+  * Get a Git client (GUI)
+    * GitKraken is a good choice (<https://gitkraken.com>)
+    * GitHub offers a free client, GitHub Desktop (<https://desktop.github.com/>)
+    * RStudio has a basic Git client built-in, which is fine for much day-to-day use
+* See <https://happygitwithr.com/> for more detailed instructions
+
+## Key principles -- Version control
+
+* Using Git (& GitHub) in your projects
+  * A couple of ways to get this set up. Probably the easiest is:
+  * Create a project repository (repo) on GitHub
+  * Import ('clone') the repo as a new RStudio project
+  * Make changes as usual in RStudio (or nay other program)
+  * 'Commit' (take a snapshop of the current state of the project) often to your local repo
+  * Less often (maybe once/day) 'push' (sync) the local repo to GitHub
+* What to put under version control
+  * Source code
+  * Raw data (unless its very large)
+
+:::{.absolute .fragment top=480 left=500 width=500 style="background:#ffffff; border-style:solid; border-width:medium; border-color:red; font-size:0.9em; margin-left:20px; line-height:0.9;"}
+What **not** to put under version control
+
+* Most intermediate objects
+* Miscellaneous supporting documents (pdf files, etc.)
+* Final output in the form of word documents, etc.
+:::
+
+## Key principles
+
+* Raw data stays raw
+* Source is real
+* Design for collaboration
+  * (including with your future self)
+* Consider version control
+* Automation?
+
+## Key principles
+
+* Raw data stays raw
+* Source is real
+* Design for collaboration
+  * (including with your future self)
+* Consider version control
+* [Automation?]{style="color:Red;"}
+
+## Key principles -- Automation
+
+* Just as we treat source code as the ‘true’, reproducible record of each step of the analysis, we can record (and automate) how the sequence of individual steps fits together to produce our final results
+
+::: {.fragment fragment-index=1}
+::: {.fragment .fade-out fragment-index=2}
+![](images/workflow.png){.absolute top=100 left=333}
+:::
+:::
+
+:::{.fragment fragment-index=2}
+
+* Can be as simple as something like:
+
+	```{.r}
+	source("code/00-download-data.R")
+	source("code/01-tabulate-frequencies.R")
+	source("code/02-create-histogram.R")
+	source("code/03-render-report.R")
+	```
+
+* Shows in what order to run the scripts, and allows us to resume from the middle (if, for example, you have only changed the file `02-create-histogram.R`, there is no need to redo the first two steps, but we do need to rerun the `create-histogram` and `render-report` steps
+  * Each script should load the required inputs and save the resulting output to file
+
+:::
+
+## Key principles -- Automation
+
+* For more complicated (or long-running) analyses, we may want to explicitly specify dependencies and let the computer figure out how to get everything up-to-date
+
+* Two good tools for doing this:
+  * make
+  * targets
+
+* Advantages of an automated pipeline like this:
+  * When you modify one stage of the pipeline, you can re-run your analyses to get up-to-date final results, with a single click/command
+  * Only the things that need to be updated will be re-run, saving time (important if some of your analyses take a long time to run)
+
+## Key principles -- Automation
+
+* Make is a system tool, designed for use in software development, to specify targets, commands, and dependencies between files and selectively re-run commands when dependencies change
+
+* A Makefile is a plain text file specifying a list of these targets (intermediate/output files in the analysis workflow), commands (to create the targets), and dependencies (input files needed for each command)
+
+```{.bash}
+words.txt: /usr/share/dict/words
+	cp /usr/share/dict/words words.txt
+
+histogram.tsv: histogram.r words.txt
+	Rscript $<
+
+histogram.png: histogram.tsv
+	Rscript -e 'library(ggplot2); qplot(Length, Freq, data=read.delim("$<")); ggsave("$@")'
+
+report.html: report.rmd histogram.tsv histogram.png
+	Rscript -e 'rmarkdown::render("$<")'
+```
+
+## Key principles -- Automation
+
+* `targets` is an R package designed to do something very similar, but specifically designed for R projects
+
+```{.r}
+plan <- list(
+  tar_file(words, download_words()),
+  tar_target(frequency_table, summarise_word_lengths(words)),
+  tar_target(histogram, create_histogram(frequency_table)),
+  tar_file(report, render_report("reports/report.rmd", frequency_table, histogram))
+)
+```
+
+* Abstract workflow steps behind function calls (with meaningful names) as much as possible
+  * The plan should be a clear, high-level overview of the analysis steps required
+
+## Summary
+
+* Treat raw data as read-only
+* Save source, not the workspace
+* Design for collaboration
+  * Follow a logical project structure
+  * Simplify code with human-readable abstractions (functions etc)
+* Consider version control
+* Consider automating your analyses
+
+---
+
+![](images/owl.jpg)
+
+## Summary
+
+* Treat raw data as read-only ![](images/tick.jpg){style="height:1em"}
+* Save source, not the workspace ![](images/tick.jpg){style="height:1em"}
+* Design for collaboration
+  * Follow a logical project structure ![](images/tick.jpg){style="height:1em"}
+  * Simplify code with human-readable abstractions (functions etc) ![](images/tick.jpg){style="height:1em"}
+* Consider version control
+* Consider automating your analyses
+
+:::{.absolute top=120 left=540 style="color:#0070c0; font-size:0.6em; line-height:0.6em;"}
+(if you are already writing<br>script files for your analyses)
+:::
+
+:::{.absolute top=325 left=800 style="color:#0070c0; font-size:0.6em; line-height:0.6em;"}
+(will get better<br>with practice)
+:::
+
+## Resources {.smaller}
+
+* Wilson G, Aruliah DA, Brown CT, Chue Hong NP, Davis M, et al. (2014) Best Practices for Scientific Computing. PLoS Biol 12(1):e1001745. <https://doi.org/10.1371/journal.pbio.1001745>
+* Wilson G, Bryan J, Cranston K, Kitzes J, Nederbragt L, Teal TK (2017) Good enough practices in scientific computing. PloS Comput Biol 13(6):e1005510. <https://doi.org/10.1371/journal.pcbi.1005510>
+* Bryan J, Hester J. What they forgot to teach you about R. <https://rstats.wtf> (especially Section I: A holistic workflow)
+* Bryan J. STAT545 (based on the UBC course of the same name). <https://stat545.com>
+* Bryan J. Happy Git and GitHub for the useR. <https://happygitwithr.com>
+* For targets:
+  * McBain M. Benefits of a function-based diet (The {drake} post). <https://milesmcbain.xyz/the-drake-post/>
+    * Refers to the `drake` package, which was a predecessor package of `targets`. The same concepts all apply
+  * Landau W. The \{targets\} R package user manual. <https://books.ropensci.org/targets/>
 
 # Writing reports in R {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
 
