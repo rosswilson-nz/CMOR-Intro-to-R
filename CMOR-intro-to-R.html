@@ -78,12 +78,12 @@
       
       .reveal .slide ul li li,
       .reveal .slide ol li li {
-      	font-size: 0.8em;
+      	font-size: 0.9em;
       }
 
       .reveal .slide ul li li li,
       .reveal .slide ol li li li {
-      	font-size: 0.64em;
+      	font-size: 0.8em;
       }
 
       .reveal .slide ul[role="tablist"] li {
@@ -1101,10 +1101,461 @@
 <h1>Data analysis workflows and project organisation</h1>
 
 </section>
-<section id="project-folder-organisation" class="slide level2">
-<h2>Project folder organisation</h2>
+<section id="reproducible-research" class="slide level2">
+<h2>Reproducible research</h2>
+<ul>
+<li>What is ‘reproducibility’?
+<ul>
+<li>Focus here is on <em>computational reproducibility</em> – can your results be replicated by someone (or yourself!) with access to your data, code, etc.</li>
+</ul></li>
+<li>Why might research not be reproducible?
+<ul>
+<li>Raw data are not available or have been changed</li>
+<li>Intermediate steps taken to extract, clean, reshape, merge, or analyse data are not adequately recorded or described</li>
+<li>Software tools have changed or are no longer available since the analysis was conducted</li>
+<li>Errors in manually transcribing results from analysis software to final report (manuscript, etc.)</li>
+</ul></li>
+</ul>
+</section>
+<section id="reproducible-research-1" class="slide level2">
+<h2>Reproducible research</h2>
+<ul>
+<li>Ensuring reproducibility (for others) can also have great benefits for you as the analyst/author
+<ul>
+<li>When you come back to an analysis later, you know exactly what you did, why you did it, and how to replicate it if needed</li>
+<li>If data changes, errors are identified, or new analyses need to be conducted, your analysis and results can easily be updated</li>
+<li>The code and methods used in one project/analysis can be re-used in other work</li>
+<li>Keeping to a simple, standardised workflow for all projects allows you to switch easily &amp; quickly between projects
+<ul>
+<li>And prevents you having to make a whole bunch of new decisions every time you start something new</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
 
-<img data-src="images/bad_layout.png" class="fragment r-stretch"></section></section>
+
+<img data-src="images/interconnected-tasks.png" class="r-stretch"></section>
+<section id="key-principles" class="slide level2">
+<h2>Key principles</h2>
+<ul>
+<li>Raw data stays raw</li>
+<li>Source is real</li>
+<li>Design for collaboration
+<ul>
+<li>(including with your future self)</li>
+</ul></li>
+<li>Consider version control</li>
+<li>Automation?</li>
+</ul>
+</section>
+<section id="key-principles-raw-data" class="slide level2">
+<h2>Key principles – Raw data</h2>
+<ul>
+<li>Raw data stays raw
+<ul>
+<li>Make raw data files read-only</li>
+</ul></li>
+</ul>
+</section>
+<section id="key-principles---raw-data" class="slide level2">
+<h2>Key principles - Raw data</h2>
+
+<img data-src="images/read-only.png" class="r-stretch"></section>
+<section id="key-principles-raw-data-1" class="slide level2">
+<h2>Key principles – Raw data</h2>
+<ul>
+<li>Raw data stays raw
+<ul>
+<li>Make raw data files read-only</li>
+<li>Can be relaxed (temporarily) if needed, but avoids accidental changes</li>
+<li>Most (probably all) changes to data should be scripted (in R, Stata, etc.) rather than made directly in raw data files</li>
+</ul></li>
+</ul>
+</section>
+<section id="key-principles-1" class="slide level2">
+<h2>Key principles</h2>
+<ul>
+<li>Raw data stays raw</li>
+<li>Source is real</li>
+<li>Design for collaboration
+<ul>
+<li>(including with your future self)</li>
+</ul></li>
+<li>Consider version control</li>
+<li>Automation?</li>
+</ul>
+</section>
+<section id="key-principles-2" class="slide level2">
+<h2>Key principles</h2>
+<ul>
+<li>Raw data stays raw</li>
+<li><span style="color:Red;">Source is real</span></li>
+<li>Design for collaboration
+<ul>
+<li>(including with your future self)</li>
+</ul></li>
+<li>Consider version control</li>
+<li>Automation?</li>
+</ul>
+</section>
+<section id="key-principles-source-files" class="slide level2">
+<h2>Key principles – Source files</h2>
+<ul>
+<li>Source is real…
+<ul>
+<li>…workspace is replaceable</li>
+</ul></li>
+<li>Any individual R session is disposable and can be replaced/recreated at any time, if you have raw data and appropriate source code</li>
+<li>Thinking in this way forces you to follow good reproducibility practices in your analysis workflow</li>
+</ul>
+</section>
+<section id="key-principles-source-files-1" class="slide level2">
+<h2>Key principles – Source files</h2>
+<ul>
+<li>What does ‘Source is real’ mean?
+<ul>
+<li>Data import, cleaning, reshaping, wrangling, and analysis should all be conducted via script files
+<ul>
+<li>or at least documented in thorough, step-by-step detail</li>
+</ul></li>
+<li>All source code should be saved (regularly!) so all of these steps can be reproduced at any time</li>
+<li>Important (or time-consuming) intermediate objects (cleaned datasets, figures, etc) should be explicitly saved, individually, to files (by script, not the mouse, if possible)</li>
+</ul></li>
+</ul>
+</section>
+<section id="key-principles-source-files-2" class="slide level2">
+<h2>Key principles – Source files</h2>
+<ul>
+<li>Start R with a blank slate, and restart often</li>
+</ul>
+</section>
+<section id="key-principles-source-files-3" class="slide level2">
+<h2>Key principles – Source files</h2>
+
+<img data-src="images/save-workspace.png" class="r-stretch"><div class="absolute" style="border-style:solid; border-width:5px; border-color:red;top: 330px; left: 130px; width: 260px; height: 72px; ">
+
+</div>
+</section>
+<section id="key-principles-source-files-4" class="slide level2">
+<h2>Key principles – Source files</h2>
+<ul>
+<li>Start R with a blank slate, and restart often
+<ul>
+<li>When you are running code interactively to try things out, you will be adding objects to the workspace, loading packages, etc</li>
+<li>If you inadvertently rely on these objects, packages, etc in your source files, you may not be able to reproduce your results in a new session later</li>
+<li>If you have saved source code and intermediate objects to file as you go, it is quick and easy to restart R (Ctrl+Shift+F10, in RStudio) regularly to check whether everything still works as expected
+<ul>
+<li>It is much better to find this out after a few minutes than after a whole day’s work!</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="key-principles-3" class="slide level2">
+<h2>Key principles</h2>
+<ul>
+<li>Raw data stays raw</li>
+<li>Source is real</li>
+<li>Design for collaboration
+<ul>
+<li>(including with your future self)</li>
+</ul></li>
+<li>Consider version control</li>
+<li>Automation?</li>
+</ul>
+</section>
+<section id="key-principles-4" class="slide level2">
+<h2>Key principles</h2>
+<ul>
+<li>Raw data stays raw</li>
+<li>Source is real</li>
+<li><span style="color:Red;">Design for collaboration</span>
+<ul>
+<li>(including with your future self)</li>
+</ul></li>
+<li>Consider version control</li>
+<li>Automation?</li>
+</ul>
+</section>
+<section id="key-principles-design-for-collaboration" class="slide level2">
+<h2>Key principles – Design for collaboration</h2>
+<div class="fragment">
+<ul>
+<li>An analysis directory like this makes it very difficult for anyone (including yourself later) to follow the steps required to reproduce your results</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+
+<img data-src="images/bad_layout.png" class="r-stretch"></section>
+<section id="key-principles-design-for-collaboration-1" class="slide level2">
+<h2>Key principles – Design for collaboration</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Much better to follow a logical structure (and the same across all of your projects)
+<ul>
+<li>Set out high-level structure, e.g.
+<ol type="1">
+<li>read raw data</li>
+<li>tidy data for analysis</li>
+<li>run analyses on tidy data</li>
+<li>collate report/results of analyses</li>
+</ol></li>
+<li>Put raw data in its own directory (and read-only)</li>
+<li>Consider other structures/subfolders as appropriate for your project</li>
+</ul></li>
+</ul>
+</div><div class="column">
+<p><img data-src="images/better-layout.png"></p>
+</div>
+</div>
+</section>
+<section id="key-principles-design-for-collaboration-2" class="slide level2">
+<h2>Key principles – Design for collaboration</h2>
+<ul>
+<li>Break up complicated or repeated analysis steps into discrete functions</li>
+<li>Give functions and variables meaningful names</li>
+<li>Use comments liberally</li>
+</ul>
+</section>
+<section id="key-principles-5" class="slide level2">
+<h2>Key principles</h2>
+<ul>
+<li>Raw data stays raw</li>
+<li>Source is real</li>
+<li>Design for collaboration
+<ul>
+<li>(including with your future self)</li>
+</ul></li>
+<li>Consider version control</li>
+<li>Automation?</li>
+</ul>
+</section>
+<section id="key-principles-6" class="slide level2">
+<h2>Key principles</h2>
+<ul>
+<li>Raw data stays raw</li>
+<li>Source is real</li>
+<li>Design for collaboration
+<ul>
+<li>(including with your future self)</li>
+</ul></li>
+<li><span style="color:Red;">Consider version control</span></li>
+<li>Automation?</li>
+</ul>
+</section>
+<section id="key-principles-version-control" class="slide level2">
+<h2>Key principles – Version control</h2>
+<ul>
+<li><p>Keeping track of changes to data and code (and being able to revert to a previous version if things go wrong) is critical for reproducible research</p></li>
+<li><p>This is particularly true when collaborating with others</p></li>
+<li><p>The best way to do this is with a version control system such as Git</p></li>
+</ul>
+</section>
+<section id="key-principles-version-control-1" class="slide level2">
+<h2>Key principles – Version control</h2>
+<ul>
+<li>We won’t go into this in detail today, but a quick Getting Started guide:
+<ul>
+<li>Register a GitHub account (<a href="https://github.com" class="uri">https://github.com</a>)</li>
+<li>Install Git (<a href="https://git-scm.com" class="uri">https://git-scm.com</a>) and complete basic setup</li>
+<li>Get a Git client (GUI)
+<ul>
+<li>GitKraken is a good choice (<a href="https://gitkraken.com" class="uri">https://gitkraken.com</a>)</li>
+<li>GitHub offers a free client, GitHub Desktop (<a href="https://desktop.github.com/" class="uri">https://desktop.github.com/</a>)</li>
+<li>RStudio has a basic Git client built-in, which is fine for much day-to-day use</li>
+</ul></li>
+</ul></li>
+<li>See <a href="https://happygitwithr.com/" class="uri">https://happygitwithr.com/</a> for more detailed instructions</li>
+</ul>
+</section>
+<section id="key-principles-version-control-2" class="slide level2">
+<h2>Key principles – Version control</h2>
+<ul>
+<li>Using Git (&amp; GitHub) in your projects
+<ul>
+<li>A couple of ways to get this set up. Probably the easiest is:</li>
+<li>Create a project repository (repo) on GitHub</li>
+<li>Import (‘clone’) the repo as a new RStudio project</li>
+<li>Make changes as usual in RStudio (or nay other program)</li>
+<li>‘Commit’ (take a snapshop of the current state of the project) often to your local repo</li>
+<li>Less often (maybe once/day) ‘push’ (sync) the local repo to GitHub</li>
+</ul></li>
+<li>What to put under version control
+<ul>
+<li>Source code</li>
+<li>Raw data (unless its very large)</li>
+</ul></li>
+</ul>
+<div class="absolute fragment" style="background:#ffffff; border-style:solid; border-width:medium; border-color:red; font-size:0.9em; margin-left:20px; line-height:0.9;top: 480px; left: 500px; width: 500px; ">
+<p>What <strong>not</strong> to put under version control</p>
+<ul>
+<li>Most intermediate objects</li>
+<li>Miscellaneous supporting documents (pdf files, etc.)</li>
+<li>Final output in the form of word documents, etc.</li>
+</ul>
+</div>
+</section>
+<section id="key-principles-7" class="slide level2">
+<h2>Key principles</h2>
+<ul>
+<li>Raw data stays raw</li>
+<li>Source is real</li>
+<li>Design for collaboration
+<ul>
+<li>(including with your future self)</li>
+</ul></li>
+<li>Consider version control</li>
+<li>Automation?</li>
+</ul>
+</section>
+<section id="key-principles-8" class="slide level2">
+<h2>Key principles</h2>
+<ul>
+<li>Raw data stays raw</li>
+<li>Source is real</li>
+<li>Design for collaboration
+<ul>
+<li>(including with your future self)</li>
+</ul></li>
+<li>Consider version control</li>
+<li><span style="color:Red;">Automation?</span></li>
+</ul>
+</section>
+<section id="key-principles-automation" class="slide level2">
+<h2>Key principles – Automation</h2>
+<ul>
+<li>Just as we treat source code as the ‘true’, reproducible record of each step of the analysis, we can record (and automate) how the sequence of individual steps fits together to produce our final results</li>
+</ul>
+<div class="fragment" data-fragment-index="1">
+<div class="fragment fade-out" data-fragment-index="2">
+<p><img data-src="images/workflow.png" class="absolute" style="top: 100px; left: 333px; "></p>
+</div>
+</div>
+<div class="fragment" data-fragment-index="2">
+<ul>
+<li><p>Can be as simple as something like:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">source</span>(<span class="st">"code/00-download-data.R"</span>)</span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="fu">source</span>(<span class="st">"code/01-tabulate-frequencies.R"</span>)</span>
+<span id="cb47-3"><a href="#cb47-3"></a><span class="fu">source</span>(<span class="st">"code/02-create-histogram.R"</span>)</span>
+<span id="cb47-4"><a href="#cb47-4"></a><span class="fu">source</span>(<span class="st">"code/03-render-report.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Shows in what order to run the scripts, and allows us to resume from the middle (if, for example, you have only changed the file <code>02-create-histogram.R</code>, there is no need to redo the first two steps, but we do need to rerun the <code>create-histogram</code> and <code>render-report</code> steps</p>
+<ul>
+<li>Each script should load the required inputs and save the resulting output to file</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="key-principles-automation-1" class="slide level2">
+<h2>Key principles – Automation</h2>
+<ul>
+<li><p>For more complicated (or long-running) analyses, we may want to explicitly specify dependencies and let the computer figure out how to get everything up-to-date</p></li>
+<li><p>Two good tools for doing this:</p>
+<ul>
+<li>make</li>
+<li>targets</li>
+</ul></li>
+<li><p>Advantages of an automated pipeline like this:</p>
+<ul>
+<li>When you modify one stage of the pipeline, you can re-run your analyses to get up-to-date final results, with a single click/command</li>
+<li>Only the things that need to be updated will be re-run, saving time (important if some of your analyses take a long time to run)</li>
+</ul></li>
+</ul>
+</section>
+<section id="key-principles-automation-2" class="slide level2">
+<h2>Key principles – Automation</h2>
+<ul>
+<li><p>Make is a system tool, designed for use in software development, to specify targets, commands, and dependencies between files and selectively re-run commands when dependencies change</p></li>
+<li><p>A Makefile is a plain text file specifying a list of these targets (intermediate/output files in the analysis workflow), commands (to create the targets), and dependencies (input files needed for each command)</p></li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1"></a><span class="ex">words.txt:</span> /usr/share/dict/words</span>
+<span id="cb48-2"><a href="#cb48-2"></a>    <span class="fu">cp</span> /usr/share/dict/words words.txt</span>
+<span id="cb48-3"><a href="#cb48-3"></a></span>
+<span id="cb48-4"><a href="#cb48-4"></a><span class="ex">histogram.tsv:</span> histogram.r words.txt</span>
+<span id="cb48-5"><a href="#cb48-5"></a>    <span class="ex">Rscript</span> $<span class="op">&lt;</span></span>
+<span id="cb48-6"><a href="#cb48-6"></a></span>
+<span id="cb48-7"><a href="#cb48-7"></a><span class="ex">histogram.png:</span> histogram.tsv</span>
+<span id="cb48-8"><a href="#cb48-8"></a>    <span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">'library(ggplot2); qplot(Length, Freq, data=read.delim("$&lt;")); ggsave("$@")'</span></span>
+<span id="cb48-9"><a href="#cb48-9"></a></span>
+<span id="cb48-10"><a href="#cb48-10"></a><span class="ex">report.html:</span> report.rmd histogram.tsv histogram.png</span>
+<span id="cb48-11"><a href="#cb48-11"></a>    <span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">'rmarkdown::render("$&lt;")'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="key-principles-automation-3" class="slide level2">
+<h2>Key principles – Automation</h2>
+<ul>
+<li><code>targets</code> is an R package designed to do something very similar, but specifically designed for R projects</li>
+</ul>
+<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>plan <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb49-2"><a href="#cb49-2"></a>  <span class="fu">tar_file</span>(words, <span class="fu">download_words</span>()),</span>
+<span id="cb49-3"><a href="#cb49-3"></a>  <span class="fu">tar_target</span>(frequency_table, <span class="fu">summarise_word_lengths</span>(words)),</span>
+<span id="cb49-4"><a href="#cb49-4"></a>  <span class="fu">tar_target</span>(histogram, <span class="fu">create_histogram</span>(frequency_table)),</span>
+<span id="cb49-5"><a href="#cb49-5"></a>  <span class="fu">tar_file</span>(report, <span class="fu">render_report</span>(<span class="st">"reports/report.rmd"</span>, frequency_table, histogram))</span>
+<span id="cb49-6"><a href="#cb49-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Abstract workflow steps behind function calls (with meaningful names) as much as possible
+<ul>
+<li>The plan should be a clear, high-level overview of the analysis steps required</li>
+</ul></li>
+</ul>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>Treat raw data as read-only</li>
+<li>Save source, not the workspace</li>
+<li>Design for collaboration
+<ul>
+<li>Follow a logical project structure</li>
+<li>Simplify code with human-readable abstractions (functions etc)</li>
+</ul></li>
+<li>Consider version control</li>
+<li>Consider automating your analyses</li>
+</ul>
+</section>
+<section class="slide level2">
+
+
+<img data-src="images/owl.jpg" class="r-stretch"></section>
+<section id="summary-1" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>Treat raw data as read-only <img data-src="images/tick.jpg" style="height:1em"></li>
+<li>Save source, not the workspace <img data-src="images/tick.jpg" style="height:1em"></li>
+<li>Design for collaboration
+<ul>
+<li>Follow a logical project structure <img data-src="images/tick.jpg" style="height:1em"></li>
+<li>Simplify code with human-readable abstractions (functions etc) <img data-src="images/tick.jpg" style="height:1em"></li>
+</ul></li>
+<li>Consider version control</li>
+<li>Consider automating your analyses</li>
+</ul>
+<div class="absolute" style="color:#0070c0; font-size:0.6em; line-height:0.6em;top: 120px; left: 540px; ">
+<p>(if you are already writing<br>script files for your analyses)</p>
+</div>
+<div class="absolute" style="color:#0070c0; font-size:0.6em; line-height:0.6em;top: 325px; left: 800px; ">
+<p>(will get better<br>with practice)</p>
+</div>
+</section>
+<section id="resources-1" class="slide level2 smaller">
+<h2>Resources</h2>
+<ul>
+<li>Wilson G, Aruliah DA, Brown CT, Chue Hong NP, Davis M, et al.&nbsp;(2014) Best Practices for Scientific Computing. PLoS Biol 12(1):e1001745. <a href="https://doi.org/10.1371/journal.pbio.1001745" class="uri">https://doi.org/10.1371/journal.pbio.1001745</a></li>
+<li>Wilson G, Bryan J, Cranston K, Kitzes J, Nederbragt L, Teal TK (2017) Good enough practices in scientific computing. PloS Comput Biol 13(6):e1005510. <a href="https://doi.org/10.1371/journal.pcbi.1005510" class="uri">https://doi.org/10.1371/journal.pcbi.1005510</a></li>
+<li>Bryan J, Hester J. What they forgot to teach you about R. <a href="https://rstats.wtf" class="uri">https://rstats.wtf</a> (especially Section I: A holistic workflow)</li>
+<li>Bryan J. STAT545 (based on the UBC course of the same name). <a href="https://stat545.com" class="uri">https://stat545.com</a></li>
+<li>Bryan J. Happy Git and GitHub for the useR. <a href="https://happygitwithr.com" class="uri">https://happygitwithr.com</a></li>
+<li>For targets:
+<ul>
+<li>McBain M. Benefits of a function-based diet (The {drake} post). <a href="https://milesmcbain.xyz/the-drake-post/" class="uri">https://milesmcbain.xyz/the-drake-post/</a>
+<ul>
+<li>Refers to the <code>drake</code> package, which was a predecessor package of <code>targets</code>. The same concepts all apply</li>
+</ul></li>
+<li>Landau W. The {targets} R package user manual. <a href="https://books.ropensci.org/targets/" class="uri">https://books.ropensci.org/targets/</a></li>
+</ul></li>
+</ul>
+</section></section>
 <section id="writing-reports-in-r" class="title-slide slide level1 center" data-background-image="images/title-background.jpg" data-background-size="contain" data-background-repeat="no-repeat" style="text-align:right;">
 <h1>Writing reports in R</h1>
 
