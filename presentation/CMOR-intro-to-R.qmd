@@ -8,8 +8,9 @@ format:
   revealjs:
     theme: [default, cmor.scss]
     title-slide-attributes: 
-      data-background-image: images/title-background.jpg
-      data-background-size: contain
+      data-background-image: images/otago-pennant.png, images/cmor-banner.png, images/title-background.png
+      data-background-size: 7%, 25%, 100%
+      data-background-position: 3% 1%, bottom 1% left 50px,0 0
       data-background-repeat: no-repeat
     template-partials:
       - styles.html
@@ -24,7 +25,7 @@ options(pillar.min_title_chars = 8)
 ```
 
 
-# Getting Started {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
+# Getting Started {background-image="images/otago-pennant.png, images/cmor-banner.png, images/title-background.png" background-size="7%, 25%, 100%" background-repeat="no-repeat" background-position="3% 1%, bottom 1% left 50px,0 0" style="text-align:right;"}
 
 ## What is R? What is RStudio?
 
@@ -240,7 +241,7 @@ a[c(TRUE, FALSE, TRUE, FALSE)]
 a[a > 4]
 ```
 
-# Working with Data Frames {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
+# Working with Data Frames {background-image="images/otago-pennant.png, images/cmor-banner.png, images/title-background.png" background-size="7%, 25%, 100%" background-repeat="no-repeat" background-position="3% 1%, bottom 1% left 50px,0 0" style="text-align:right;"}
 
 ## Data frames
 
@@ -394,7 +395,7 @@ gapminder_wide %>%
 - Advanced R (<https://adv-r.hadley.nz>) and R Packages (<https://r-pkgs.org>)
   - More advanced -- good next steps once you're a bit more comfortable using R
 
-# Data analysis in R (regression) {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
+# Data analysis in R (regression) {background-image="images/otago-pennant.png, images/cmor-banner.png, images/title-background.png" background-size="7%, 25%, 100%" background-repeat="no-repeat" background-position="3% 1%, bottom 1% left 50px,0 0" style="text-align:right;"}
 
 ## Everything in R is an object
 
@@ -519,7 +520,7 @@ tidy(linear_regression_model)
 glance(linear_regression_model)
 ```
 
-# Data visualisation {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
+# Data visualisation {background-image="images/otago-pennant.png, images/cmor-banner.png, images/title-background.png" background-size="7%, 25%, 100%" background-repeat="no-repeat" background-position="3% 1%, bottom 1% left 50px,0 0" style="text-align:right;"}
 
 ## Data visualisation with `ggplot2`
 
@@ -572,7 +573,7 @@ ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))
 ![](images/ggplot-axes.png){.absolute .fragment .fade-out top=100 left=200 width=550 height=550}
 :::
 
-# Data analysis workflows and project organisation {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
+# Data analysis workflows and project organisation {background-image="images/otago-pennant.png, images/cmor-banner.png, images/title-background.png" background-size="7%, 25%, 100%" background-repeat="no-repeat" background-position="3% 1%, bottom 1% left 50px,0 0" style="text-align:right;"}
 
 ## Reproducible research
 
@@ -924,7 +925,7 @@ plan <- list(
     * Refers to the `drake` package, which was a predecessor package of `targets`. The same concepts all apply
   * Landau W. The \{targets\} R package user manual. <https://books.ropensci.org/targets/>
 
-# Writing reports in R {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
+# Writing reports in R {background-image="images/otago-pennant.png, images/cmor-banner.png, images/title-background.png" background-size="7%, 25%, 100%" background-repeat="no-repeat" background-position="3% 1%, bottom 1% left 50px,0 0" style="text-align:right;"}
 
 ## Data workflow
 
@@ -993,8 +994,8 @@ Advantages:
 
 
 
-# Version control {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
+# Version control {background-image="images/otago-pennant.png, images/cmor-banner.png, images/title-background.png" background-size="7%, 25%, 100%" background-repeat="no-repeat" background-position="3% 1%, bottom 1% left 50px,0 0" style="text-align:right;"}
 
-# Automation {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
+# Automation {background-image="images/otago-pennant.png, images/cmor-banner.png, images/title-background.png" background-size="7%, 25%, 100%" background-repeat="no-repeat" background-position="3% 1%, bottom 1% left 50px,0 0" style="text-align:right;"}
 
-# Programming in R {background-image="images/title-background.jpg" background-size="contain" background-repeat="no-repeat" style="text-align:right;"}
+# Programming in R {background-image="images/otago-pennant.png, images/cmor-banner.png, images/title-background.png" background-size="7%, 25%, 100%" background-repeat="no-repeat" background-position="3% 1%, bottom 1% left 50px,0 0" style="text-align:right;"}

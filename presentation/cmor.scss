@@ -18,10 +18,10 @@ $presentation-heading-font: sans-serif !default;
 /*-- scss:mixins --*/
 @mixin bodyBackground() {
 	background: {
-		image: url("/images/background.jpg");
-	  size: contain;
+		image: url("/images/otago-pennant.png"), url("/images/cmor-banner.png");
+	  size: 7%, 25%;
 	  repeat: no-repeat;
-	  position: center;
+	  position: 3% 1%, bottom 1% left 50px;
 	}
 }
 
