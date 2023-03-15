@@ -1032,11 +1032,239 @@
 </ul></li>
 </ul>
 </section></section>
+<section>
 <section id="data-analysis-in-r-regression" class="title-slide slide level1 center" data-background-image="images/title-background.jpg" data-background-size="contain" data-background-repeat="no-repeat" style="text-align:right;">
 <h1>Data analysis in R (regression)</h1>
 
 </section>
+<section id="everything-in-r-is-an-object" class="slide level2">
+<h2>Everything in R is an object</h2>
+<div class="fragment">
+<ul>
+<li>This includes your fitted regression models</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Workflow:
+<ul>
+<li>Import/tidy/manipulate raw data</li>
+<li>Run regression or other models</li>
+<li>Use the created model objects
+<ul>
+<li>print to console</li>
+<li>save to file</li>
+<li>extract coefficient estimates</li>
+<li>plot results</li>
+<li>export to excel/word</li>
+<li>etc.</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="fitted-model-objects" class="slide level2">
+<h2>Fitted model objects</h2>
+<ul>
+<li><p>R has evolved over time to fit a variety of different needs and use cases</p></li>
+<li><p>This gives it great flexibility and ability to meet the needs of different users</p></li>
+<li><p>But, the diversity of interfaces, data structures, implementation, and fitted model objects can be a challenge</p>
+<ul>
+<li>There is often more than one way to fit a given model</li>
+<li>What you’ve learned about one model implemented in a given package may not translate well to working with other functions/packages</li>
+</ul></li>
+<li><p>We’ll cover some tools to help bridge that gap</p></li>
+</ul>
+</section>
+<section id="fitted-model-objects-1" class="slide level2">
+<h2>Fitted model objects</h2>
+<ul>
+<li><p>A few common (but not universal) features:</p></li>
+<li><p>Models are described by a <code>formula</code>: e.g.&nbsp;<code>y ~ x + z</code></p></li>
+<li><p>Data are provided in a data frame (or, equivalently, tibble)</p></li>
+<li><p><code>coef()</code>, <code>vcov()</code>, <code>summary()</code> can be used to extract the coefficient estimates, variance covariance matrix, and to print a summary of the fitted model</p></li>
+</ul>
+</section>
+<section id="the-broom-package" class="slide level2">
+<h2>The <code>broom</code> package</h2>
+<ul>
+<li><p><code>broom</code> provides several functions to convert fitted model objects to tidy tibbles</p></li>
+<li><p>The package works with several model fitting functions from base R and commonly-used packages</p>
+<ul>
+<li>Some other packages may also implement their own methods to work with these functions</li>
+</ul></li>
+<li><p>Functions:</p>
+<ul>
+<li><code>tidy()</code>: construct a tibble that summarises the statistical findings (coefficients, p-values, etc.)</li>
+<li><code>augment()</code>: add new columns to the original data (predictions/fitted values, etc.)</li>
+<li><code>glance()</code>: construct a one-row summary of the model (goodness-of-fit, etc.)</li>
+</ul></li>
+</ul>
+</section>
+<section id="first-example-linear-regression" class="slide level2">
+<h2>First example – linear regression</h2>
+<ul>
+<li><p>Linear regression models can be fitted with the <code>lm</code> function (in the <code>stats</code> package, part of base R)</p></li>
+<li><p>We’ll start by loading the gapminder dataset from the previous session:</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb44-2"><a href="#cb44-2"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"raw_data/gapminder_data.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="first-example-linear-regression-1" class="slide level2">
+<h2>First example – linear regression</h2>
+<ul>
+<li>Use <code>?lm</code> to find the documentation</li>
+</ul>
+<div class="fragment" data-fragment-index="2">
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>linear_regression_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(lifeExp <span class="sc">~</span> gdpPercap, gapminder)</span>
+<span id="cb45-2"><a href="#cb45-2"></a>linear_regression_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = lifeExp ~ gdpPercap, data = gapminder)
 
+Coefficients:
+(Intercept)    gdpPercap  
+  5.396e+01    7.649e-04  </code></pre>
+</div>
+</div>
+</div>
+<p><img data-src="images/lm-documentation.png" class="absolute fragment" style="top: 50px; left: 700px; " data-fragment-index="1"></p>
+</section>
+<section id="first-example-linear-regression-2" class="slide level2">
+<h2>First example – linear regression</h2>
+<ul>
+<li><p><code>linear_regression_model</code> is now a fitted model object</p></li>
+<li><p>If we want, we can look at how this object is actually stored:</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">str</span>(linear_regression_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 12
+ $ coefficients : Named num [1:2] 5.40e+01 7.65e-04
+  ..- attr(*, "names")= chr [1:2] "(Intercept)" "gdpPercap"
+ $ residuals    : Named num [1:1704] -25.8 -24.3 -22.6 -20.6 -18.4 ...
+  ..- attr(*, "names")= chr [1:1704] "1" "2" "3" "4" ...
+ $ effects      : Named num [1:1704] -2455.1 311.1 -21.6 -19.6 -17.5 ...
+  ..- attr(*, "names")= chr [1:1704] "(Intercept)" "gdpPercap" "" "" ...
+ $ rank         : int 2
+ $ fitted.values: Named num [1:1704] 54.6 54.6 54.6 54.6 54.5 ...
+  ..- attr(*, "names")= chr [1:1704] "1" "2" "3" "4" ...
+ $ assign       : int [1:2] 0 1
+ $ qr           :List of 5
+  ..$ qr   : num [1:1704, 1:2] -41.2795 0.0242 0.0242 0.0242 0.0242 ...
+  .. ..- attr(*, "dimnames")=List of 2
+  .. .. ..$ : chr [1:1704] "1" "2" "3" "4" ...
+  .. .. ..$ : chr [1:2] "(Intercept)" "gdpPercap"
+  .. ..- attr(*, "assign")= int [1:2] 0 1
+  ..$ qraux: num [1:2] 1.02 1.02
+  ..$ pivot: int [1:2] 1 2
+  ..$ tol  : num 1e-07
+  ..$ rank : int 2
+  ..- attr(*, "class")= chr "qr"
+ $ df.residual  : int 1702
+ $ xlevels      : Named list()
+ $ call         : language lm(formula = lifeExp ~ gdpPercap, data = gapminder)
+ $ terms        :Classes 'terms', 'formula'  language lifeExp ~ gdpPercap
+  .. ..- attr(*, "variables")= language list(lifeExp, gdpPercap)
+  .. ..- attr(*, "factors")= int [1:2, 1] 0 1
+  .. .. ..- attr(*, "dimnames")=List of 2
+  .. .. .. ..$ : chr [1:2] "lifeExp" "gdpPercap"
+  .. .. .. ..$ : chr "gdpPercap"
+  .. ..- attr(*, "term.labels")= chr "gdpPercap"
+  .. ..- attr(*, "order")= int 1
+  .. ..- attr(*, "intercept")= int 1
+  .. ..- attr(*, "response")= int 1
+  .. ..- attr(*, ".Environment")=&lt;environment: R_GlobalEnv&gt; 
+  .. ..- attr(*, "predvars")= language list(lifeExp, gdpPercap)
+  .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
+  .. .. ..- attr(*, "names")= chr [1:2] "lifeExp" "gdpPercap"
+ $ model        :'data.frame':  1704 obs. of  2 variables:
+  ..$ lifeExp  : num [1:1704] 28.8 30.3 32 34 36.1 ...
+  ..$ gdpPercap: num [1:1704] 779 821 853 836 740 ...
+  ..- attr(*, "terms")=Classes 'terms', 'formula'  language lifeExp ~ gdpPercap
+  .. .. ..- attr(*, "variables")= language list(lifeExp, gdpPercap)
+  .. .. ..- attr(*, "factors")= int [1:2, 1] 0 1
+  .. .. .. ..- attr(*, "dimnames")=List of 2
+  .. .. .. .. ..$ : chr [1:2] "lifeExp" "gdpPercap"
+  .. .. .. .. ..$ : chr "gdpPercap"
+  .. .. ..- attr(*, "term.labels")= chr "gdpPercap"
+  .. .. ..- attr(*, "order")= int 1
+  .. .. ..- attr(*, "intercept")= int 1
+  .. .. ..- attr(*, "response")= int 1
+  .. .. ..- attr(*, ".Environment")=&lt;environment: R_GlobalEnv&gt; 
+  .. .. ..- attr(*, "predvars")= language list(lifeExp, gdpPercap)
+  .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
+  .. .. .. ..- attr(*, "names")= chr [1:2] "lifeExp" "gdpPercap"
+ - attr(*, "class")= chr "lm"</code></pre>
+</div>
+</div>
+</section>
+<section id="first-example-linear-regression-3" class="slide level2">
+<h2>First example – linear regression</h2>
+<ul>
+<li>More usefully, we can print a summary of the model</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">summary</span>(linear_regression_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = lifeExp ~ gdpPercap, data = gapminder)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-82.754  -7.758   2.176   8.225  18.426 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 5.396e+01  3.150e-01  171.29   &lt;2e-16 ***
+gdpPercap   7.649e-04  2.579e-05   29.66   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 10.49 on 1702 degrees of freedom
+Multiple R-squared:  0.3407,    Adjusted R-squared:  0.3403 
+F-statistic: 879.6 on 1 and 1702 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="first-example-linear-regression-4" class="slide level2">
+<h2>First example – linear regression</h2>
+<ul>
+<li>If we want to work with the results or combine/compare them with other models, <code>tidy()</code> from the <code>broom</code> package will put them into a nice tidy tibble</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb51-2"><a href="#cb51-2"></a><span class="fu">tidy</span>(linear_regression_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 x 5
+  term         estimate std.error statistic   p.value
+  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept) 54.0      0.315         171.  0        
+2 gdpPercap    0.000765 0.0000258      29.7 3.57e-156</code></pre>
+</div>
+</div>
+<div class="fragment">
+<ul>
+<li>And <code>glance()</code> gives us several overall model statistics</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">glance</span>(linear_regression_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 x 12
+  r.squared adj.r.squared sigma statistic   p.value    df logLik    AIC    BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1     0.341         0.340  10.5      880. 3.57e-156     1 -6422. 12850. 12867.
+# ... with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+</div>
+</div>
+</section></section>
 <section>
 <section id="data-visualisation" class="title-slide slide level1 center" data-background-image="images/title-background.jpg" data-background-size="contain" data-background-repeat="no-repeat" style="text-align:right;">
 <h1>Data visualisation</h1>
@@ -1057,8 +1285,8 @@
 <li>We’ll use the <code>gapminder</code> dataset from the previous session</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb44-2"><a href="#cb44-2"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"raw_data/gapminder_data.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb55-2"><a href="#cb55-2"></a>gapminder <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"raw_data/gapminder_data.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="the-grammar-of-graphics" class="slide level2">
@@ -1082,7 +1310,7 @@
 <li>start with the basic <code>ggplot</code> object</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> gapminder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> gapminder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="fragment" data-fragment-index="1">
 <p><img data-src="images/ggplot-blank.png" class="absolute fragment fade-out" style="top: 100px; left: 200px; width: 550px; height: 550px; " data-fragment-index="2"></p>
 </div>
@@ -1090,7 +1318,7 @@
 <ul>
 <li>you can specify (some of) the mappings at this stage</li>
 </ul>
-<div class="sourceCode" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> gapminder, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> gapminder, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> gdpPercap, <span class="at">y =</span> lifeExp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment fade-in" data-fragment-index="3">
 <p><img data-src="images/ggplot-axes.png" class="absolute fragment fade-out" style="top: 100px; left: 200px; width: 550px; height: 550px; "></p>
@@ -1233,7 +1461,7 @@
 <section id="key-principles-source-files-3" class="slide level2">
 <h2>Key principles – Source files</h2>
 
-<img data-src="images/save-workspace.png" class="r-stretch"><div class="absolute" style="border-style:solid; border-width:5px; border-color:red;top: 330px; left: 130px; width: 260px; height: 72px; ">
+<img data-src="images/save-workspace.PNG" class="r-stretch"><div class="absolute" style="border-style:solid; border-width:5px; border-color:red;top: 330px; left: 130px; width: 260px; height: 72px; ">
 
 </div>
 </section>
@@ -1271,7 +1499,7 @@
 <li>Source is real</li>
 <li><span style="color:Red;">Design for collaboration</span>
 <ul>
-<li>(including with your future self)</li>
+<li><span style="color:Red;">(including with your future self)</span></li>
 </ul></li>
 <li>Consider version control</li>
 <li>Automation?</li>
@@ -1437,10 +1665,10 @@
 <div class="fragment" data-fragment-index="2">
 <ul>
 <li><p>Can be as simple as something like:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">source</span>(<span class="st">"code/00-download-data.R"</span>)</span>
-<span id="cb47-2"><a href="#cb47-2"></a><span class="fu">source</span>(<span class="st">"code/01-tabulate-frequencies.R"</span>)</span>
-<span id="cb47-3"><a href="#cb47-3"></a><span class="fu">source</span>(<span class="st">"code/02-create-histogram.R"</span>)</span>
-<span id="cb47-4"><a href="#cb47-4"></a><span class="fu">source</span>(<span class="st">"code/03-render-report.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="fu">source</span>(<span class="st">"code/00-download-data.R"</span>)</span>
+<span id="cb58-2"><a href="#cb58-2"></a><span class="fu">source</span>(<span class="st">"code/01-tabulate-frequencies.R"</span>)</span>
+<span id="cb58-3"><a href="#cb58-3"></a><span class="fu">source</span>(<span class="st">"code/02-create-histogram.R"</span>)</span>
+<span id="cb58-4"><a href="#cb58-4"></a><span class="fu">source</span>(<span class="st">"code/03-render-report.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Shows in what order to run the scripts, and allows us to resume from the middle (if, for example, you have only changed the file <code>02-create-histogram.R</code>, there is no need to redo the first two steps, but we do need to rerun the <code>create-histogram</code> and <code>render-report</code> steps</p>
 <ul>
 <li>Each script should load the required inputs and save the resulting output to file</li>
@@ -1470,29 +1698,29 @@
 <li><p>Make is a system tool, designed for use in software development, to specify targets, commands, and dependencies between files and selectively re-run commands when dependencies change</p></li>
 <li><p>A Makefile is a plain text file specifying a list of these targets (intermediate/output files in the analysis workflow), commands (to create the targets), and dependencies (input files needed for each command)</p></li>
 </ul>
-<div class="sourceCode" id="cb48"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1"></a><span class="ex">words.txt:</span> /usr/share/dict/words</span>
-<span id="cb48-2"><a href="#cb48-2"></a>    <span class="fu">cp</span> /usr/share/dict/words words.txt</span>
-<span id="cb48-3"><a href="#cb48-3"></a></span>
-<span id="cb48-4"><a href="#cb48-4"></a><span class="ex">histogram.tsv:</span> histogram.r words.txt</span>
-<span id="cb48-5"><a href="#cb48-5"></a>    <span class="ex">Rscript</span> $<span class="op">&lt;</span></span>
-<span id="cb48-6"><a href="#cb48-6"></a></span>
-<span id="cb48-7"><a href="#cb48-7"></a><span class="ex">histogram.png:</span> histogram.tsv</span>
-<span id="cb48-8"><a href="#cb48-8"></a>    <span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">'library(ggplot2); qplot(Length, Freq, data=read.delim("$&lt;")); ggsave("$@")'</span></span>
-<span id="cb48-9"><a href="#cb48-9"></a></span>
-<span id="cb48-10"><a href="#cb48-10"></a><span class="ex">report.html:</span> report.rmd histogram.tsv histogram.png</span>
-<span id="cb48-11"><a href="#cb48-11"></a>    <span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">'rmarkdown::render("$&lt;")'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb59-1"><a href="#cb59-1"></a><span class="ex">words.txt:</span> /usr/share/dict/words</span>
+<span id="cb59-2"><a href="#cb59-2"></a>    <span class="fu">cp</span> /usr/share/dict/words words.txt</span>
+<span id="cb59-3"><a href="#cb59-3"></a></span>
+<span id="cb59-4"><a href="#cb59-4"></a><span class="ex">histogram.tsv:</span> histogram.r words.txt</span>
+<span id="cb59-5"><a href="#cb59-5"></a>    <span class="ex">Rscript</span> $<span class="op">&lt;</span></span>
+<span id="cb59-6"><a href="#cb59-6"></a></span>
+<span id="cb59-7"><a href="#cb59-7"></a><span class="ex">histogram.png:</span> histogram.tsv</span>
+<span id="cb59-8"><a href="#cb59-8"></a>    <span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">'library(ggplot2); qplot(Length, Freq, data=read.delim("$&lt;")); ggsave("$@")'</span></span>
+<span id="cb59-9"><a href="#cb59-9"></a></span>
+<span id="cb59-10"><a href="#cb59-10"></a><span class="ex">report.html:</span> report.rmd histogram.tsv histogram.png</span>
+<span id="cb59-11"><a href="#cb59-11"></a>    <span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">'rmarkdown::render("$&lt;")'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="key-principles-automation-3" class="slide level2">
 <h2>Key principles – Automation</h2>
 <ul>
 <li><code>targets</code> is an R package designed to do something very similar, but specifically designed for R projects</li>
 </ul>
-<div class="sourceCode" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>plan <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb49-2"><a href="#cb49-2"></a>  <span class="fu">tar_file</span>(words, <span class="fu">download_words</span>()),</span>
-<span id="cb49-3"><a href="#cb49-3"></a>  <span class="fu">tar_target</span>(frequency_table, <span class="fu">summarise_word_lengths</span>(words)),</span>
-<span id="cb49-4"><a href="#cb49-4"></a>  <span class="fu">tar_target</span>(histogram, <span class="fu">create_histogram</span>(frequency_table)),</span>
-<span id="cb49-5"><a href="#cb49-5"></a>  <span class="fu">tar_file</span>(report, <span class="fu">render_report</span>(<span class="st">"reports/report.rmd"</span>, frequency_table, histogram))</span>
-<span id="cb49-6"><a href="#cb49-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>plan <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb60-2"><a href="#cb60-2"></a>  <span class="fu">tar_file</span>(words, <span class="fu">download_words</span>()),</span>
+<span id="cb60-3"><a href="#cb60-3"></a>  <span class="fu">tar_target</span>(frequency_table, <span class="fu">summarise_word_lengths</span>(words)),</span>
+<span id="cb60-4"><a href="#cb60-4"></a>  <span class="fu">tar_target</span>(histogram, <span class="fu">create_histogram</span>(frequency_table)),</span>
+<span id="cb60-5"><a href="#cb60-5"></a>  <span class="fu">tar_file</span>(report, <span class="fu">render_report</span>(<span class="st">"reports/report.rmd"</span>, frequency_table, histogram))</span>
+<span id="cb60-6"><a href="#cb60-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Abstract workflow steps behind function calls (with meaningful names) as much as possible
 <ul>
@@ -1556,8 +1784,75 @@
 </ul></li>
 </ul>
 </section></section>
+<section>
 <section id="writing-reports-in-r" class="title-slide slide level1 center" data-background-image="images/title-background.jpg" data-background-size="contain" data-background-repeat="no-repeat" style="text-align:right;">
 <h1>Writing reports in R</h1>
+
+</section>
+<section id="data-workflow" class="slide level2">
+<h2>Data workflow</h2>
+<p><img data-src="images/linear-workflow.png" class="absolute" style="top: 180px; width: 1500px; height: 400px; "></p>
+<p><img data-src="images/workflow-arrows.png" class="absolute fragment" style="top: 55px; "></p>
+<div class="absolute fragment" style="background:#F2F2F233;top: 100px; left: 500px; width: 850px; ">
+<div class="sourceCode" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>plan <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb61-2"><a href="#cb61-2"></a>  <span class="fu">tar_file</span>(words, <span class="fu">download_words</span>()),</span>
+<span id="cb61-3"><a href="#cb61-3"></a>  <span class="fu">tar_target</span>(frequency_table, <span class="fu">summarise_word_lengths</span>(words)),</span>
+<span id="cb61-4"><a href="#cb61-4"></a>  <span class="fu">tar_target</span>(histogram, <span class="fu">create_histogram</span>(frequency_table)),</span>
+<span id="cb61-5"><a href="#cb61-5"></a>  <span class="fu">tar_file</span>(report, <span class="fu">render_report</span>(<span class="st">"reports/report.rmd"</span>, frequency_table, histogram))</span>
+<span id="cb61-6"><a href="#cb61-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="absolute fragment" style="background:#FFC20FCC; font-size:0.8em;top: 400px; left: -100px; width: 500px; ">
+<p>Advantages:</p>
+<ul>
+<li>Reported results are always kept up-to-date with data and analysis</li>
+<li>Changes at any point along the workflow can be made easily and robustly</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<iframe src="https://www.youtube.com/embed/s3JldKoA0zw" width="100%" height="100%" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</section>
+<section id="data-workflow-1" class="slide level2">
+<h2>Data workflow</h2>
+<p><img data-src="images/linear-workflow.png" class="absolute" style="top: 180px; width: 1500px; height: 400px; "></p>
+<p><img data-src="images/workflow-arrows.png" class="absolute" style="top: 55px; "></p>
+<div class="absolute" style="background:#F2F2F233;top: 100px; left: 500px; width: 850px; ">
+<div class="sourceCode" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a>plan <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb62-2"><a href="#cb62-2"></a>  <span class="fu">tar_file</span>(words, <span class="fu">download_words</span>()),</span>
+<span id="cb62-3"><a href="#cb62-3"></a>  <span class="fu">tar_target</span>(frequency_table, <span class="fu">summarise_word_lengths</span>(words)),</span>
+<span id="cb62-4"><a href="#cb62-4"></a>  <span class="fu">tar_target</span>(histogram, <span class="fu">create_histogram</span>(frequency_table)),</span>
+<span id="cb62-5"><a href="#cb62-5"></a>  <span class="fu">tar_file</span>(report, <span class="fu">render_report</span>(<span class="st">"reports/report.rmd"</span>, frequency_table, histogram))</span>
+<span id="cb62-6"><a href="#cb62-6"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="absolute" style="background:#FFC20FCC; font-size:0.8em;top: 400px; left: -100px; width: 500px; ">
+<p>Advantages:</p>
+<ul>
+<li>Reported results are always kept up-to-date with data and analysis</li>
+<li>Changes at any point along the workflow can be made easily and robustly</li>
+</ul>
+</div>
+</section>
+<section id="r-markdown" class="slide level2">
+<h2>R Markdown</h2>
+<iframe src="https://player.vimeo.com/video/178485416?embedded=true&amp;source=video_title&amp;owner=22717988" width="100%" height="85%" frameborder="0" allow="autoplay; title=" "="" fullscreen;="" picture-in-picture"="" allowfullscreen=""></iframe>
+</section>
+<section id="quarto" class="slide level2">
+<h2>Quarto</h2>
+<ul>
+<li>We’ll focus on Quarto instead</li>
+<li>Quarto is a relatively new tool very similar to RMarkdown
+<ul>
+<li>Most of what you might read about RMarkdown also applies to Quarto</li>
+<li>see also <a href="https://quarto.org" class="uri">https://quarto.org</a> for documentation and guides</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section id="version-control" class="title-slide slide level1 center" data-background-image="images/title-background.jpg" data-background-size="contain" data-background-repeat="no-repeat" style="text-align:right;">
+<h1>Version control</h1>
 
 </section>
 
