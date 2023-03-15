@@ -17,6 +17,9 @@ format:
       - title-slide.html
     preview-links: auto
     margin: 0.2
+    background-image:
+      - images/otago-pennant.png
+      - images/cmor-banner.png
 ---
 
 ```{r}
