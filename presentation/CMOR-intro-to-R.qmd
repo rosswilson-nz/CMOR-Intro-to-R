@@ -31,7 +31,6 @@ options(pillar.min_title_chars = 8)
 
 ![](images/title-background.png)
 
-
 # Getting Started {background-image="images/otago-pennant.png, images/cmor-banner.png, images/title-background.png" background-size="7%, 25%, 100%" background-repeat="no-repeat" background-position="3% 1%, bottom 1% left 50px,0 0" style="text-align:right;"}
 
 ## What is R? What is RStudio?
