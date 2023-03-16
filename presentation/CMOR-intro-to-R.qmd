@@ -8,10 +8,10 @@ format:
   revealjs:
     theme: [default, cmor.scss]
     title-slide-attributes: 
-      data-background-image: images/otago-pennant.png, images/cmor-banner.png, images/title-background.png
-      data-background-size: 7%, 25%, 100%
-      data-background-position: 3% 1%, bottom 1% left 50px,0 0
-      data-background-repeat: no-repeat
+      data-background-image: "images/otago-pennant.png, images/cmor-banner.png, images/title-background.png"
+      data-background-size: "7%, 25%, 100%"
+      data-background-position: "3% 1%, bottom 1% left 50px,0 0"
+      data-background-repeat: "no-repeat"
     template-partials:
       - styles.html
       - title-slide.html
