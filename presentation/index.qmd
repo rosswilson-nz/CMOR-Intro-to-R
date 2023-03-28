@@ -614,7 +614,7 @@ glance(gen_linear_regression_model)
 
 . . .
 
-* Some that might be of particular relavance to (some of) you:
+* Some that might be of particular relevance to (some of) you:
   * [`mediation`](https://cran.r-project.org/web/packages/mediation/index.html): parametric and non-parametric mediation analysis
   * [`eRm`](https://cran.r-project.org/web/packages/eRm/index.html) and [`ltm`](https://cran.r-project.org/web/packages/ltm/index.html): Rasch models
   * [`metafor`](https://cran.r-project.org/web/packages/metafor/index.html): meta-analysis
