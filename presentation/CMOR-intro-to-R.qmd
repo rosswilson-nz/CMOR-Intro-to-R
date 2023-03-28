@@ -441,19 +441,18 @@ gapminder_wide %>%
 
 * `broom` provides several functions to convert fitted model objects to tidy tibbles
 
-* The package works with several model fitting functions from base R and commonly-used packages
-
-  * Some other packages may also implement their own methods to work with these functions
-
 * Functions:
   * `tidy()`: construct a tibble that summarises the statistical findings (coefficients, p-values, etc.)
   * `augment()`: add new columns to the original data (predictions/fitted values, etc.)
   * `glance()`: construct a one-row summary of the model (goodness-of-fit, etc.)
 
+* The package works with several model fitting functions from base R and commonly-used packages
+
+  * Some other packages may also implement their own methods to work with these functions
+
 ## First example -- linear regression
 
-* Linear regression models can be fitted with the `lm` function (in the `stats` package, part of base R)
-
+* Linear regression models can be fitted with the `lm()` function (in the `stats` package, part of base R)
 
 * We'll start by loading the gapminder dataset from the previous session:
 
@@ -465,20 +464,28 @@ gapminder <- read_csv(here::here("raw_data/gapminder_data.csv"))
 
 ## First example -- linear regression
 
-* Use `?lm` to find the documentation
+::::: {.columns}
 
+:::: {.column width="75%"}
+* Use `?lm` to find the documentation
 
 :::{.fragment fragment-index=2}
 <br>
 
 ```{r}
+options(width=72)
+```
+
+```{r}
 #| echo: true
-linear_regression_model <- lm(lifeExp ~ gdpPercap, gapminder)
+linear_regression_model <- lm(lifeExp ~ gdpPercap + continent, gapminder)
 linear_regression_model
 ```
 :::
+::::
+:::::
 
-![](images/lm-documentation.png){.absolute .fragment fragment-index=1 top=50 left=700}
+![](images/lm-documentation.png){.absolute .fragment fragment-index=1 top=50 left=820}
 
 ## First example -- linear regression
 
@@ -494,6 +501,10 @@ str(linear_regression_model)
 ## First example -- linear regression
 
 * More usefully, we can print a summary of the model
+
+```{r}
+options(width=90)
+```
 
 ```{r}
 #| echo: true
@@ -518,6 +529,98 @@ tidy(linear_regression_model)
 #| echo: true
 glance(linear_regression_model)
 ```
+
+## First example -- linear regression
+
+* The `lmtest` and `car` packages provide tools for inference & hypothesis testing
+* Various clustered and heteroskedasticity-robust standard errors are provided by `sandwich`
+  * These work well together (and with `tidy()` from `broom`)
+
+. . .
+
+```{r}
+#| echo: true
+library(lmtest)
+library(sandwich)
+linear_regression_model %>% 
+  coeftest(vcov. = vcovCL, cluster = ~country) %>% 
+	tidy()
+```
+
+
+## Generalised linear regression
+
+* Can be fitted with the `glm()` function\
+(also in the `stats` package)
+
+:::{.fragment fragment-index=1}
+* `?glm`
+:::
+
+:::{.fragment fragment-index=2}
+<br>
+
+```{r}
+options(width=72)
+```
+
+```{r}
+#| echo: true
+gen_linear_regression_model <- glm(lifeExp ~ gdpPercap + continent,
+                                   family = "quasipoisson", gapminder)
+gen_linear_regression_model
+```
+:::
+![](images/glm-documentation.png){.absolute .fragment fragment-index=1 top=50 left=820}
+
+## Generalised linear regression
+
+```{r}
+options(width=90)
+```
+
+* Again, we can print a summary of the model
+
+```{r}
+#| echo: true
+summary(gen_linear_regression_model)
+```
+
+## Generalised linear regression
+
+* And use `tidy()` and `glance()` from the `broom` package to produce nice tidy tibbles
+
+. . .
+
+```{r}
+#| echo: true
+tidy(gen_linear_regression_model, conf.int = TRUE, exponentiate = TRUE)
+```
+
+. . .
+
+<br>
+
+```{r}
+#| echo: true
+glance(gen_linear_regression_model)
+```
+
+## What else?
+
+* There are many (**many!**) other packages that estimate different regression models or provide tools for diagnostic testing, post-hoc analysis, or visualisation of regression models
+
+* For example, the [Econometrics Task View](https://cran.r-project.org/web/views/Econometrics.html){preview-link="true"} on cran.r-project.org
+
+. . .
+
+* Some that might be of particular relavance to (some of) you:
+  * [`mediation`](https://cran.r-project.org/web/packages/mediation/index.html): parametric and non-parametric mediation analysis
+  * [`eRm`](https://cran.r-project.org/web/packages/eRm/index.html) and [`ltm`](https://cran.r-project.org/web/packages/ltm/index.html): Rasch models
+  * [`metafor`](https://cran.r-project.org/web/packages/metafor/index.html): meta-analysis
+  * [`rstan`](https://cran.r-project.org/web/packages/rstan/index.html), [`rstanarm`](https://cran.r-project.org/web/packages/rstanarm/index.html), and [`brms`](https://cran.r-project.org/web/packages/brms/index.html): Bayesian analysis (using [Stan](http://mc-stan.org/))
+  * [`plm`](https://cran.r-project.org/web/packages/plm/index.html), [`fixest`](https://cran.r-project.org/web/packages/fixest/index.html), [`lme4`](https://cran.r-project.org/web/packages/lme4/index.html), and [`nlme`](https://cran.r-project.org/web/packages/nlme/index.html): panel and multi-level/mixed effect models
+  
 
 # Data visualisation {background-image="images/otago-pennant.png, images/cmor-banner.png, images/title-background.png" background-size="7%, 25%, 100%" background-repeat="no-repeat" background-position="3% 1%, bottom 1% left 50px,0 0" style="text-align:right;"}
 
