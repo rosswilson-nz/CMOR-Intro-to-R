@@ -688,6 +688,14 @@ ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))
   * Software tools have changed or are no longer available since the analysis was conducted
   * Errors in manually transcribing results from analysis software to final report (manuscript, etc.)
 
+## Reproducible research {.smaller}
+
+<br>
+
+> Computers are now essential in all branches of science, but most researchers are never taught the equivalent of basic lab skills for research computing. As a result, data can get lost, analyses can take much longer than necessary, and researchers are limited in how effectively they can work with software and data. Computing workflows need to follow the same practices as lab projects and notebooks, with organized data, documented steps, and the project structured for reproducibility, but researchers new to computing often don't know where to start.
+
+--- Wilson G, Bryan J, Cranston K, et al. *Good enough practices in scientific computing*. PLoS Comput Biol 2017;13:e1005510
+
 ## Reproducible research
 
 * Ensuring reproducibility (for others) can also have great benefits for you as the analyst/author
@@ -715,7 +723,7 @@ ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))
 * Raw data stays raw
   * Make raw data files read-only
   
-## Key principles - Raw data
+## Key principles -- Raw data
 
 ![](images/read-only.png)
 
@@ -808,7 +816,7 @@ ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))
 
 ## Key principles -- Design for collaboration
 
-:::{.columns}
+:::::{.columns}
 
 ::: {.column}
 * Much better to follow a logical structure (and the same across all of your projects)
@@ -825,13 +833,15 @@ ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))
 ![](images/better-layout.png)
 :::
 
-:::
+:::::
 
 ## Key principles -- Design for collaboration
 
 * Break up complicated or repeated analysis steps into discrete functions
 * Give functions and variables meaningful names
 * Use comments liberally
+
+![](images/functions.png){.fragment .absolute top=200 left=450}
 
 ## Key principles
 
@@ -876,8 +886,8 @@ ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))
   * A couple of ways to get this set up. Probably the easiest is:
   * Create a project repository (repo) on GitHub
   * Import ('clone') the repo as a new RStudio project
-  * Make changes as usual in RStudio (or nay other program)
-  * 'Commit' (take a snapshop of the current state of the project) often to your local repo
+  * Make changes as usual in RStudio (or any other program)
+  * 'Commit' (take a snapshot of the current state of the project) often to your local repo
   * Less often (maybe once/day) 'push' (sync) the local repo to GitHub
 * What to put under version control
   * Source code
@@ -999,20 +1009,24 @@ plan <- list(
 
 ## Summary
 
-* Treat raw data as read-only ![](images/tick.jpg){style="height:1em"}
-* Save source, not the workspace ![](images/tick.jpg){style="height:1em"}
+* Treat raw data as read-only ![](images/tick.jpg){.fragment fragment-index=1 style="height:1em"}
+* Save source, not the workspace ![](images/tick.jpg){.fragment fragment-index=3 style="height:1em"}
 * Design for collaboration
-  * Follow a logical project structure ![](images/tick.jpg){style="height:1em"}
-  * Simplify code with human-readable abstractions (functions etc) ![](images/tick.jpg){style="height:1em"}
+  * Follow a logical project structure ![](images/tick.jpg){.fragment fragment-index=2 style="height:1em"}
+  * Simplify code with human-readable abstractions (functions etc) ![](images/tick.jpg){.fragment fragment-index=4 style="height:1em"}
 * Consider version control
 * Consider automating your analyses
 
-:::{.absolute top=120 left=540 style="color:#0070c0; font-size:0.6em; line-height:0.6em;"}
+:::{.absolute .fragment fragment-index=3 top=120 left=540 style="color:#0070c0; font-size:0.6em; line-height:0.6em;"}
 (if you are already writing<br>script files for your analyses)
 :::
 
-:::{.absolute top=325 left=800 style="color:#0070c0; font-size:0.6em; line-height:0.6em;"}
+:::{.absolute .fragment fragment-index=4 top=325 left=800 style="color:#0070c0; font-size:0.6em; line-height:0.6em;"}
 (will get better<br>with practice)
+:::
+
+:::{.absolute .fragment fragment-index=5 top=445 left=70 style="color:#0070c0; font-size:0.8em; line-height:0.8em;"}
+(start with a simple high-level overview of the steps in the analysis,<br>even if you don't want to do a full automated pipeline)
 :::
 
 ## Resources {.smaller}
@@ -1023,7 +1037,7 @@ plan <- list(
 * Bryan J. STAT545 (based on the UBC course of the same name). <https://stat545.com>
 * Bryan J. Happy Git and GitHub for the useR. <https://happygitwithr.com>
 * For targets:
-  * McBain M. Benefits of a function-based diet (The {drake} post). <https://milesmcbain.xyz/the-drake-post/>
+  * McBain M. Benefits of a function-based diet (The \{drake\} post). <https://milesmcbain.xyz/the-drake-post/>
     * Refers to the `drake` package, which was a predecessor package of `targets`. The same concepts all apply
   * Landau W. The \{targets\} R package user manual. <https://books.ropensci.org/targets/>
 

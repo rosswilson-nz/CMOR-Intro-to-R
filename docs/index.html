@@ -1534,7 +1534,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="reproducible-research-1" class="slide level2">
+<section id="reproducible-research-1" class="slide level2 smaller">
+<h2>Reproducible research</h2>
+<p><br></p>
+<blockquote>
+<p>Computers are now essential in all branches of science, but most researchers are never taught the equivalent of basic lab skills for research computing. As a result, data can get lost, analyses can take much longer than necessary, and researchers are limited in how effectively they can work with software and data. Computing workflows need to follow the same practices as lab projects and notebooks, with organized data, documented steps, and the project structured for reproducibility, but researchers new to computing often don’t know where to start.</p>
+</blockquote>
+<p>— Wilson G, Bryan J, Cranston K, et al.&nbsp;<em>Good enough practices in scientific computing</em>. PLoS Comput Biol 2017;13:e1005510</p>
+</section>
+<section id="reproducible-research-2" class="slide level2">
 <h2>Reproducible research</h2>
 <ul>
 <li>Ensuring reproducibility (for others) can also have great benefits for you as the analyst/author
@@ -1575,11 +1583,11 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </ul></li>
 </ul>
 </section>
-<section id="key-principles---raw-data" class="slide level2">
-<h2>Key principles - Raw data</h2>
+<section id="key-principles-raw-data-1" class="slide level2">
+<h2>Key principles – Raw data</h2>
 
 <img data-src="images/read-only.png" class="r-stretch"></section>
-<section id="key-principles-raw-data-1" class="slide level2">
+<section id="key-principles-raw-data-2" class="slide level2">
 <h2>Key principles – Raw data</h2>
 <ul>
 <li>Raw data stays raw
@@ -1736,6 +1744,7 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li>Give functions and variables meaningful names</li>
 <li>Use comments liberally</li>
 </ul>
+<p><img data-src="images/functions.png" class="fragment absolute" style="top: 200px; left: 450px; "></p>
 </section>
 <section id="key-principles-5" class="slide level2">
 <h2>Key principles</h2>
@@ -1796,8 +1805,8 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li>A couple of ways to get this set up. Probably the easiest is:</li>
 <li>Create a project repository (repo) on GitHub</li>
 <li>Import (‘clone’) the repo as a new RStudio project</li>
-<li>Make changes as usual in RStudio (or nay other program)</li>
-<li>‘Commit’ (take a snapshop of the current state of the project) often to your local repo</li>
+<li>Make changes as usual in RStudio (or any other program)</li>
+<li>‘Commit’ (take a snapshot of the current state of the project) often to your local repo</li>
 <li>Less often (maybe once/day) ‘push’ (sync) the local repo to GitHub</li>
 </ul></li>
 <li>What to put under version control
@@ -1938,21 +1947,24 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <section id="summary-1" class="slide level2">
 <h2>Summary</h2>
 <ul>
-<li>Treat raw data as read-only <img data-src="images/tick.jpg" style="height:1em"></li>
-<li>Save source, not the workspace <img data-src="images/tick.jpg" style="height:1em"></li>
+<li>Treat raw data as read-only <img data-src="images/tick.jpg" class="fragment" style="height:1em" data-fragment-index="1"></li>
+<li>Save source, not the workspace <img data-src="images/tick.jpg" class="fragment" style="height:1em" data-fragment-index="3"></li>
 <li>Design for collaboration
 <ul>
-<li>Follow a logical project structure <img data-src="images/tick.jpg" style="height:1em"></li>
-<li>Simplify code with human-readable abstractions (functions etc) <img data-src="images/tick.jpg" style="height:1em"></li>
+<li>Follow a logical project structure <img data-src="images/tick.jpg" class="fragment" style="height:1em" data-fragment-index="2"></li>
+<li>Simplify code with human-readable abstractions (functions etc) <img data-src="images/tick.jpg" class="fragment" style="height:1em" data-fragment-index="4"></li>
 </ul></li>
 <li>Consider version control</li>
 <li>Consider automating your analyses</li>
 </ul>
-<div class="absolute" style="color:#0070c0; font-size:0.6em; line-height:0.6em;top: 120px; left: 540px; ">
+<div class="absolute fragment" data-fragment-index="3" style="color:#0070c0; font-size:0.6em; line-height:0.6em;top: 120px; left: 540px; ">
 <p>(if you are already writing<br>script files for your analyses)</p>
 </div>
-<div class="absolute" style="color:#0070c0; font-size:0.6em; line-height:0.6em;top: 325px; left: 800px; ">
+<div class="absolute fragment" data-fragment-index="4" style="color:#0070c0; font-size:0.6em; line-height:0.6em;top: 325px; left: 800px; ">
 <p>(will get better<br>with practice)</p>
+</div>
+<div class="absolute fragment" data-fragment-index="5" style="color:#0070c0; font-size:0.8em; line-height:0.8em;top: 445px; left: 70px; ">
+<p>(start with a simple high-level overview of the steps in the analysis,<br>even if you don’t want to do a full automated pipeline)</p>
 </div>
 </section>
 <section id="resources-1" class="slide level2 smaller">
